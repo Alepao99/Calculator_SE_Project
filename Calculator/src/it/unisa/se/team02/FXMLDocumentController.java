@@ -83,10 +83,18 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void Multiplication(ActionEvent event) {
+        ComplexNumber complex1 = stack.pop();
+        ComplexNumber complex2 = stack.pop();
+        stack.add(0, complex1.multiply(complex2));
+        setResult(stack.top());
     }
 
     @FXML
     private void Division(ActionEvent event) {
+        ComplexNumber complex1 = stack.pop();
+        ComplexNumber complex2 = stack.pop();
+        stack.add(0, complex1.divide(complex2));
+        setResult(stack.top());
     }
 
     @FXML
@@ -123,6 +131,10 @@ public class FXMLDocumentController implements Initializable {
     
     public void updateTextField() {
         inputText.setText(currentNumber);
+    }
+    
+    public void setResult(ComplexNumber complex) {
+        outputText.setText(complex.toString());
     }
 
     @FXML

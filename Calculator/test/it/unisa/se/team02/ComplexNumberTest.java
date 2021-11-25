@@ -105,6 +105,28 @@ public class ComplexNumberTest {
         double ris = Math.atan(1);
         assertTrue(t1.fi() == ris);
     }
+
+    /**
+     * Test of multiply method, of class ComplexNumber.
+     */
+    @Test
+    public void testMultiply() {
+        ComplexNumber t1 = new ComplexNumber(1,1);
+        ComplexNumber t2 = new ComplexNumber(2,2);
+        ComplexNumber result = t1.multiply(t2);
+        assertTrue((result.getReal() == 0) && (result.getImg() == 4));        
+    }
+
+    /**
+     * Test of divide method, of class ComplexNumber.
+     */
+    @Test
+    public void testDivide() {
+        ComplexNumber t1 = new ComplexNumber(1,1);
+        ComplexNumber t2 = new ComplexNumber(2,2);
+        ComplexNumber result = t1.divide(t2);
+        assertTrue((result.getReal() == 0.5) && (result.getImg() == 0));
+    }
     
     
 }

@@ -71,5 +71,19 @@ public class ComplexNumber {
         return -1;
     }
     
+    public ComplexNumber multiply(ComplexNumber otherNumber) {
+        newR = (real * otherNumber.getReal()) - (img * otherNumber.getImg());
+        newI = (img * otherNumber.getReal()) + (real * otherNumber.getImg());
+        newComplex = new ComplexNumber(newR, newI);
+        return newComplex;
+    }
+
+    public ComplexNumber divide(ComplexNumber otherNumber) {
+        newR = ((real * otherNumber.getReal()) + (img * otherNumber.getImg())) / ((otherNumber.getReal() * otherNumber.getReal()) + (otherNumber.getImg() * otherNumber.getImg()));
+        newI = ((img * otherNumber.getReal()) - (real * otherNumber.getImg())) / ((otherNumber.getReal() * otherNumber.getReal()) + (otherNumber.getImg() * otherNumber.getImg()));
+        newComplex = new ComplexNumber(newR, newI);
+        return newComplex;
+    }
+    
     
 }
