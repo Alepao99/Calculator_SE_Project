@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author aless
+ * @author Team02
  */
 public class ObservableStackIT {
 

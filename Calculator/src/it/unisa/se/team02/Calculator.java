@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author aless
+ * @author Team02
  */
 public class Calculator extends Application {
     

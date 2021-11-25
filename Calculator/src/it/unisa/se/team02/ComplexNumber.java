@@ -6,7 +6,7 @@ package it.unisa.se.team02;
 
 /**
  *
- * @author Francesco
+ * @author Team02
  */
 public class ComplexNumber {
     
