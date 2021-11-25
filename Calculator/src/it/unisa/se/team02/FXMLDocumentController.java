@@ -7,25 +7,26 @@ package it.unisa.se.team02;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TextField; 
+import javafx.scene.control.TextField;
 
 /**
  *
  * @author Team02
  */
 public class FXMLDocumentController implements Initializable {
-    
+
     private Label label;
     @FXML
     private TextField inputText;
     @FXML
     private TextField outputText;
-   @FXML
+    @FXML
     private ListView<ComplexNumber> mainList;
 
     ObservableStack<ComplexNumber> stack;
@@ -36,49 +37,65 @@ public class FXMLDocumentController implements Initializable {
         stack = new ObservableStack<>();
         mainList.setItems(stack);
     }
-    
+
+    @FXML
+    private void addZero(ActionEvent event) {
+        addNumber("0");
+    }
+
     @FXML
     private void addOne(ActionEvent event) {
-    }
-
-    @FXML
-    private void addSeven(ActionEvent event) {
-    }
-
-    @FXML
-    private void addEight(ActionEvent event) {
-    }
-
-    @FXML
-    private void addNine(ActionEvent event) {
-    }
-
-    @FXML
-    private void addSix(ActionEvent event) {
+        addNumber("1");
     }
 
     @FXML
     private void addTwo(ActionEvent event) {
+        addNumber("2");
     }
 
     @FXML
     private void addThree(ActionEvent event) {
+        addNumber("3");
     }
 
     @FXML
     private void addFour(ActionEvent event) {
+        addNumber("4");
     }
 
     @FXML
     private void addFive(ActionEvent event) {
+        addNumber("5");
     }
 
     @FXML
-    private void Add(ActionEvent event) {
+    private void addSix(ActionEvent event) {
+        addNumber("6");
     }
 
     @FXML
-    private void Sub(ActionEvent event) {
+    private void addSeven(ActionEvent event) {
+        addNumber("7");
+    }
+
+    @FXML
+    private void addEight(ActionEvent event) {
+        addNumber("8");
+    }
+
+    @FXML
+    private void addNine(ActionEvent event) {
+        addNumber("9");
+    }
+
+    @FXML
+    private void addVirgola(ActionEvent event) {
+        addNumber(",");
+    }
+
+    @FXML
+    private void addMeno(ActionEvent event) {
+        addNumber("-");
     }
 
     @FXML
@@ -98,47 +115,48 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
-    private void addZero(ActionEvent event) {
-    }
-
-    @FXML
-    private void addVirgola(ActionEvent event) {
-    }
-
-    @FXML
-    private void addMeno(ActionEvent event) {
-    }
-
-    @FXML
     private void Push(ActionEvent event) {
         ComplexNumber complex;
-        if(currentNumber.contains(",")){
+        if (currentNumber.contains(",")) {
             float real = Float.parseFloat(currentNumber.split(",")[0]);
             float img = Float.parseFloat(currentNumber.split(",")[1]);
             complex = new ComplexNumber(real, img);
-        }else{
+        } else {
             float real = Float.parseFloat(currentNumber);
             complex = new ComplexNumber(real, 0);
         }
-        stack.add(0,complex); 
+        stack.add(0, complex);
         refresh(); //formatto l'inputText
     }
-    
+
+    public void addNumber(String number) {
+        currentNumber += number;
+        updateTextField();
+    }
+
     private void refresh() {
         currentNumber = "";
         updateTextField();
     }
-    
+
     public void updateTextField() {
         inputText.setText(currentNumber);
     }
-    
+
     public void setResult(ComplexNumber complex) {
         outputText.setText(complex.toString());
     }
 
     @FXML
     private void Delete(ActionEvent event) {
+        String s = currentNumber.substring(0, currentNumber.length() - 1);
+        currentNumber = s;
+        updateTextField();
+    }
+
+    @FXML
+    private void quitApplication(ActionEvent event) {
+        Platform.exit();
     }
 
     @FXML
@@ -149,8 +167,4 @@ public class FXMLDocumentController implements Initializable {
     private void InverterSign(ActionEvent event) {
     }
 
-    @FXML
-    private void quitApplication(ActionEvent event) {
-    }
-    
 }
