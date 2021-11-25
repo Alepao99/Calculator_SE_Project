@@ -12,7 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.TextField; 
 
 /**
  *
@@ -25,19 +25,18 @@ public class FXMLDocumentController implements Initializable {
     private TextField inputText;
     @FXML
     private TextField outputText;
-    @FXML
-    private ListView<?> mainList;
-    
-    private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked me!");
-        label.setText("Hello World!");
-    }
-    
+   @FXML
+    private ListView<ComplexNumber> mainList;
+
+    ObservableStack<ComplexNumber> stack;
+    private String currentNumber = "";
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
-
+        stack = new ObservableStack<>();
+        mainList.setItems(stack);
+    }
+    
     @FXML
     private void addOne(ActionEvent event) {
     }
@@ -104,6 +103,26 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void Push(ActionEvent event) {
+        ComplexNumber complex;
+        if(currentNumber.contains(",")){
+            float real = Float.parseFloat(currentNumber.split(",")[0]);
+            float img = Float.parseFloat(currentNumber.split(",")[1]);
+            complex = new ComplexNumber(real, img);
+        }else{
+            float real = Float.parseFloat(currentNumber);
+            complex = new ComplexNumber(real, 0);
+        }
+        stack.add(0,complex); 
+        refresh(); //formatto l'inputText
+    }
+    
+    private void refresh() {
+        currentNumber = "";
+        updateTextField();
+    }
+    
+    public void updateTextField() {
+        inputText.setText(currentNumber);
     }
 
     @FXML
