@@ -167,4 +167,12 @@ public class FXMLDocumentController implements Initializable {
     private void InverterSign(ActionEvent event) {
     }
 
+    @FXML
+    private void Add(ActionEvent event) {
+    }
+
+    @FXML
+    private void Sub(ActionEvent event) {
+    }
+
 }

@@ -84,6 +84,11 @@ public class ComplexNumber {
         newComplex = new ComplexNumber(newR, newI);
         return newComplex;
     }
+
+    @Override
+    public String toString() {
+        return "(" + String.format("%.3f", real) + ", j" + String.format("%.3f", img) + ")";
+    }
     
     
 }
