@@ -4,6 +4,9 @@
  */
 package it.unisa.se.team02;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Team02
@@ -107,7 +110,15 @@ public class ComplexNumber {
       public ComplexNumber invertSign() {
         return new ComplexNumber(-this.real, -this.img);
     }
-     
+      
+    public List<ComplexNumber> sqrt() {
+        List<ComplexNumber> list = new ArrayList();
+        double sqrtmod = Math.sqrt(module);
+        for (int k = 0; k < 2; k++) {
+            list.add(new ComplexNumber(sqrtmod * Math.cos((fi + 2 * k * Math.PI) / 2), sqrtmod * Math.sin((fi + 2 * k * Math.PI) / 2)));
+        }
+        return list;
+    }    
      
      
     

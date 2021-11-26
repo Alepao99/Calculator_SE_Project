@@ -6,6 +6,7 @@ package it.unisa.se.team02;
  */
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -161,6 +162,14 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void Sqrt(ActionEvent event) {
+        ComplexNumber complex = stack.pop();
+        List<ComplexNumber> list = complex.sqrt();
+        String s = "";
+        for (ComplexNumber value : list) {
+            s += value.toString() + "; ";
+            stack.add(0, value);
+        }
+        outputText.setText(s);
     }
 
     @FXML

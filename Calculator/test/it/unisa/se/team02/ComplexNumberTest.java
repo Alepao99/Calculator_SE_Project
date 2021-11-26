@@ -4,6 +4,8 @@
  */
 package it.unisa.se.team02;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -175,6 +177,30 @@ public class ComplexNumberTest {
         assertTrue((result.getReal() == -1) && (result.getImg() == -1)); 
     
     }
-    
-    
+
+    /**
+     * Test of sqrt method, of class ComplexNumber.
+     */
+    @Test
+    public void testSqrt() {
+        ComplexNumber t1 = new ComplexNumber(2,3);
+        List<ComplexNumber> list = t1.sqrt();
+        ComplexNumber r1 = list.get(0);
+        ComplexNumber r2 = list.get(1);
+
+        String real1 = String.valueOf(r1.getReal());
+        real1= real1.substring(0, 5);
+        String img1= String.valueOf(r1.getImg());
+        img1=img1.substring(0,5);
+        String real2 = String.valueOf(r2.getReal());
+        real2= real2.substring(0, 6);
+        String img2= String.valueOf(r2.getImg());
+        img2=img2.substring(0,6);
+
+        assertTrue(real1.compareTo("1.674") == 0);
+        assertTrue(real2.compareTo("-1.674") == 0);
+        assertTrue(img1.compareTo("0.895") == 0);
+        assertTrue(img2.compareTo("-0.895") == 0);
+    }
+
 }
