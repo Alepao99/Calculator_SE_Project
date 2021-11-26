@@ -165,14 +165,28 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void InverterSign(ActionEvent event) {
+        ComplexNumber complex = stack.pop();
+        ComplexNumber complex1 = complex.invertSign();
+        stack.add(0,complex1);
+        outputText.setText(complex1.toString());
     }
 
     @FXML
     private void Add(ActionEvent event) {
+   
+        ComplexNumber complex1 = stack.pop();
+        ComplexNumber complex2 = stack.pop();
+        stack.add(0,complex1.add(complex2));
+        setResult(stack.top());    
     }
 
     @FXML
     private void Sub(ActionEvent event) {
+        
+        ComplexNumber complex1 = stack.pop();
+        ComplexNumber complex2 = stack.pop();
+        stack.add(0,complex1.subtract(complex2));
+        setResult(stack.top());
     }
 
 }

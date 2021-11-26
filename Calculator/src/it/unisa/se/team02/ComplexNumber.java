@@ -90,5 +90,26 @@ public class ComplexNumber {
         return "(" + String.format("%.3f", real) + ", j" + String.format("%.3f", img) + ")";
     }
     
+     public ComplexNumber add(ComplexNumber otherNumber) {
+        newR = real + otherNumber.getReal();
+        newI = img + otherNumber.getImg();
+        newComplex = new ComplexNumber(newR, newI);
+        return newComplex;
+    }
+    
+     public ComplexNumber subtract(ComplexNumber otherNumber) {
+        newR = real - otherNumber.getReal();
+        newI = img - otherNumber.getImg();
+        newComplex = new ComplexNumber(newR, newI);
+        return newComplex;
+    }
+     
+      public ComplexNumber invertSign() {
+        return new ComplexNumber(-this.real, -this.img);
+    }
+     
+     
+     
+    
     
 }

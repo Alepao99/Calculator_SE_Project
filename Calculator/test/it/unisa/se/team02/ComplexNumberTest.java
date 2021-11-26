@@ -127,6 +127,54 @@ public class ComplexNumberTest {
         ComplexNumber result = t1.divide(t2);
         assertTrue((result.getReal() == 0.5) && (result.getImg() == 0));
     }
+
+    /**
+     * Test of toString method, of class ComplexNumber.
+     */
+    @Test
+    public void testToString() {
+        ComplexNumber t1 = new ComplexNumber(1,1);
+        String s1 = t1.toString();
+        String s2 = "(1,000, j1,000)";
+        assertTrue(s1.compareTo(s2) == 0);
+    }
+
+    /**
+     * Test of add method, of class ComplexNumber.
+     */
+    @Test
+    public void testAdd() {
+        ComplexNumber t1 = new ComplexNumber(1,1);
+        ComplexNumber t2 = new ComplexNumber(2,2);
+        ComplexNumber result = t1.add(t2);
+        assertTrue((result.getReal() == 3) && (result.getImg() == 3)); 
+        
+    }
+
+    /**
+     * Test of subtract method, of class ComplexNumber.
+     */
+    @Test
+    public void testSubtract() {
+        
+        ComplexNumber t1 = new ComplexNumber(1,1);
+        ComplexNumber t2 = new ComplexNumber(2,2);
+        ComplexNumber result = t1.subtract(t2);
+        assertTrue((result.getReal() == -1) && (result.getImg() == -1)); 
+        
+    }
+
+    /**
+     * Test of invertSign method, of class ComplexNumber.
+     */
+    @Test
+    public void testInvertSign() {
+    
+         ComplexNumber t1 = new ComplexNumber(1,1);
+        ComplexNumber result = t1.invertSign();
+        assertTrue((result.getReal() == -1) && (result.getImg() == -1)); 
+    
+    }
     
     
 }
