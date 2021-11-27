@@ -11,7 +11,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 /**
- *
+ * The class implements the calculator's "memory" concept using an observable LinkedList.
+ * 
  * @author Team02
  * 
  */
@@ -19,21 +20,35 @@ public class ObservableStack<ComplexNumber> extends SimpleListProperty<ComplexNu
 
     private final LinkedList<ComplexNumber> stack;
 
+    /**
+     * 
+     * The class constructor creates an observable LinkedList.
+     * 
+    */
     public ObservableStack() {
         this.stack = new LinkedList<>();
         this.set(FXCollections.observableList(this.stack));
     }
 
+    /**
+     * 
+     * The top method returns the first element in the stack but without removing it.
+     * 
+     * @return 
+     * Return a ComplexNumber.
+    */
     public ComplexNumber top() throws NoSuchElementException {
         ComplexNumber temp = stack.peekFirst();
         return temp;
     }
 
     /**
-     * @return the item at the top of the stack granted that the stack is not
-     * empty
-     * @throws NoSuchElementException if the stack is empty
-     */
+     * 
+     * The pop method returns the first element in the stack and remove it.
+     * 
+     * @return 
+     * Return a ComplexNumber.
+    */
     public ComplexNumber pop() throws NoSuchElementException {
         ComplexNumber temp = stack.removeFirst();
         return temp;

@@ -198,12 +198,22 @@ public class FXMLDocumentController implements Initializable {
         updateTextField();
     }
 
+    /**
+     * 
+     * The refresh method initializes the variable "currentNumber" and calls the updateTextField() method. Return Void.
+     * 
+     * @see updateTextField
+    */
     private void refresh() {
         currentNumber = "";
         updateTextField();
     }
 
-
+    /**
+     * 
+     * The updateTextField method sets the content of the variable "currentNumber" in the input area of ​​the interface. Return Void.
+     * 
+    */
     public void updateTextField() {
         inputText.setText(currentNumber);
     }
@@ -325,6 +335,13 @@ public class FXMLDocumentController implements Initializable {
         outputText.setText(complex1.toString());
     }
 
+   /**
+    * 
+    * The push method creates a ComplexNumber starting from the string inserted in input via the interface,
+    * stored in the variable "currentNumber". It then adds the new ComplexNumber to the Stack and calls the refresh () method.
+    * Return Void.
+    * 
+    */
     @FXML
     private void push(ActionEvent event) {
         ComplexNumber complex;
