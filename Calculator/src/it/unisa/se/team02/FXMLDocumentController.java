@@ -4,7 +4,6 @@ package it.unisa.se.team02;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXML2.java to edit this template
  */
-
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -99,37 +98,6 @@ public class FXMLDocumentController implements Initializable {
         addNumber("-");
     }
 
-    @FXML
-    private void Multiplication(ActionEvent event) {
-        ComplexNumber complex1 = stack.pop();
-        ComplexNumber complex2 = stack.pop();
-        stack.add(0, complex1.multiply(complex2));
-        setResult(stack.top());
-    }
-
-    @FXML
-    private void Division(ActionEvent event) {
-        ComplexNumber complex1 = stack.pop();
-        ComplexNumber complex2 = stack.pop();
-        stack.add(0, complex1.divide(complex2));
-        setResult(stack.top());
-    }
-
-    @FXML
-    private void Push(ActionEvent event) {
-        ComplexNumber complex;
-        if (currentNumber.contains(",")) {
-            float real = Float.parseFloat(currentNumber.split(",")[0]);
-            float img = Float.parseFloat(currentNumber.split(",")[1]);
-            complex = new ComplexNumber(real, img);
-        } else {
-            float real = Float.parseFloat(currentNumber);
-            complex = new ComplexNumber(real, 0);
-        }
-        stack.add(0, complex);
-        refresh(); //formatto l'inputText
-    }
-
     public void addNumber(String number) {
         currentNumber += number;
         updateTextField();
@@ -149,19 +117,66 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
-    private void Delete(ActionEvent event) {
+    private void quitApplication(ActionEvent event) {
+        Platform.exit();
+    }
+
+    @FXML
+    private void add(ActionEvent event) {
+        ComplexNumber complex1 = stack.pop();
+        ComplexNumber complex2 = stack.pop();
+        stack.add(0, complex1.add(complex2));
+        setResult(stack.top());
+    }
+
+    @FXML
+    private void sub(ActionEvent event) {
+        ComplexNumber complex1 = stack.pop();
+        ComplexNumber complex2 = stack.pop();
+        stack.add(0, complex1.subtract(complex2));
+        setResult(stack.top());
+    }
+
+    @FXML
+    private void multiplication(ActionEvent event) {
+        ComplexNumber complex1 = stack.pop();
+        ComplexNumber complex2 = stack.pop();
+        stack.add(0, complex1.multiply(complex2));
+        setResult(stack.top());
+    }
+
+    @FXML
+    private void division(ActionEvent event) {
+        ComplexNumber complex1 = stack.pop();
+        ComplexNumber complex2 = stack.pop();
+        stack.add(0, complex1.divide(complex2));
+        setResult(stack.top());
+    }
+
+    @FXML
+    private void push(ActionEvent event) {
+        ComplexNumber complex;
+        if (currentNumber.contains(",")) {
+            float real = Float.parseFloat(currentNumber.split(",")[0]);
+            float img = Float.parseFloat(currentNumber.split(",")[1]);
+            complex = new ComplexNumber(real, img);
+        } else {
+            float real = Float.parseFloat(currentNumber);
+            complex = new ComplexNumber(real, 0);
+        }
+        stack.add(0, complex);
+        refresh(); //formatto l'inputText
+    }
+
+    @FXML
+    private void delete(ActionEvent event) {
         String s = currentNumber.substring(0, currentNumber.length() - 1);
         currentNumber = s;
         updateTextField();
     }
 
     @FXML
-    private void quitApplication(ActionEvent event) {
-        Platform.exit();
-    }
-
-    @FXML
-    private void Sqrt(ActionEvent event) {
+    private void sqrt(ActionEvent event) {
         ComplexNumber complex = stack.pop();
         List<ComplexNumber> list = complex.sqrt();
         String s = "";
@@ -173,29 +188,10 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
-    private void InverterSign(ActionEvent event) {
+    private void inverterSign(ActionEvent event) {
         ComplexNumber complex = stack.pop();
         ComplexNumber complex1 = complex.invertSign();
-        stack.add(0,complex1);
+        stack.add(0, complex1);
         outputText.setText(complex1.toString());
     }
-
-    @FXML
-    private void Add(ActionEvent event) {
-   
-        ComplexNumber complex1 = stack.pop();
-        ComplexNumber complex2 = stack.pop();
-        stack.add(0,complex1.add(complex2));
-        setResult(stack.top());    
-    }
-
-    @FXML
-    private void Sub(ActionEvent event) {
-        
-        ComplexNumber complex1 = stack.pop();
-        ComplexNumber complex2 = stack.pop();
-        stack.add(0,complex1.subtract(complex2));
-        setResult(stack.top());
-    }
-
 }

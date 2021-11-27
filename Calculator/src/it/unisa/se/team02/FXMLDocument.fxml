@@ -97,17 +97,17 @@
                                 <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#addThree" prefHeight="59.0" prefWidth="122.0" text="3" GridPane.columnIndex="2" />
                                 <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#addFour" prefHeight="59.0" prefWidth="122.0" text="4" GridPane.rowIndex="1" />
                                 <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#addFive" prefHeight="59.0" prefWidth="122.0" text="5" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                <Button layoutX="10.0" layoutY="15.0" mnemonicParsing="false" onAction="#Add" prefHeight="56.0" prefWidth="118.0" text="+" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-                                <Button layoutX="10.0" layoutY="15.0" mnemonicParsing="false" onAction="#Sub" prefHeight="56.0" prefWidth="118.0" text="SUB" GridPane.columnIndex="4" />
-                                <Button layoutX="10.0" layoutY="15.0" mnemonicParsing="false" onAction="#Multiplication" prefHeight="56.0" prefWidth="118.0" text="*" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                                <Button layoutX="10.0" layoutY="15.0" mnemonicParsing="false" onAction="#Division" prefHeight="56.0" prefWidth="118.0" text="/" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                                <Button layoutX="10.0" layoutY="15.0" mnemonicParsing="false" onAction="#add" prefHeight="56.0" prefWidth="118.0" text="+" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                                <Button layoutX="10.0" layoutY="15.0" mnemonicParsing="false" onAction="#sub" prefHeight="56.0" prefWidth="118.0" text="SUB" GridPane.columnIndex="4" />
+                                <Button layoutX="10.0" layoutY="15.0" mnemonicParsing="false" onAction="#multiplication" prefHeight="56.0" prefWidth="118.0" text="*" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                                <Button layoutX="10.0" layoutY="15.0" mnemonicParsing="false" onAction="#division" prefHeight="56.0" prefWidth="118.0" text="/" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                                 <Button layoutX="10.0" layoutY="15.0" mnemonicParsing="false" onAction="#addZero" prefHeight="56.0" prefWidth="118.0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                 <Button layoutX="10.0" layoutY="15.0" mnemonicParsing="false" onAction="#addVirgola" prefHeight="56.0" prefWidth="118.0" text="," GridPane.columnIndex="2" GridPane.rowIndex="3" />
                                 <Button layoutX="10.0" layoutY="11.0" mnemonicParsing="false" onAction="#addMeno" prefHeight="56.0" prefWidth="118.0" text="-" GridPane.rowIndex="3" />
-                                <Button layoutX="10.0" layoutY="11.0" mnemonicParsing="false" onAction="#Push" prefHeight="56.0" prefWidth="118.0" text="ADD" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                                <Button mnemonicParsing="false" onAction="#Delete" prefHeight="59.0" prefWidth="122.0" text="C" GridPane.columnIndex="3" />
-                        <Button mnemonicParsing="false" onAction="#Sqrt" prefHeight="56.0" prefWidth="118.0" text="Sqrt" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                        <Button mnemonicParsing="false" onAction="#InverterSign" prefHeight="56.0" prefWidth="118.0" text="+-" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+                                <Button layoutX="10.0" layoutY="11.0" mnemonicParsing="false" onAction="#push" prefHeight="56.0" prefWidth="118.0" text="ADD" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                                <Button mnemonicParsing="false" onAction="#delete" prefHeight="59.0" prefWidth="122.0" text="C" GridPane.columnIndex="3" />
+                        <Button mnemonicParsing="false" onAction="#sqrt" prefHeight="56.0" prefWidth="118.0" text="Sqrt" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                        <Button mnemonicParsing="false" onAction="#inverterSign" prefHeight="56.0" prefWidth="118.0" text="+-" GridPane.columnIndex="4" GridPane.rowIndex="3" />
                             </children>
                         </GridPane>
                     </children>
