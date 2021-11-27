@@ -115,6 +115,11 @@ public class ComplexNumber {
         return -1;
     }
     
+    /**
+     * This method allows to do the multiplication between two complex numbers.
+     * @param otherNumber represents the second complex number to multiply.
+     * @return this method allows obtain a complex number given the multiplication of two complex numbers. 
+     */
     public ComplexNumber multiply(ComplexNumber otherNumber) {
         newR = (real * otherNumber.getReal()) - (img * otherNumber.getImg());
         newI = (img * otherNumber.getReal()) + (real * otherNumber.getImg());
@@ -122,6 +127,11 @@ public class ComplexNumber {
         return newComplex;
     }
 
+    /**
+     * This method allows to do the division between two complex numbers.
+     * @param otherNumber represents the second complex number to divide.
+     * @return this method allows obtain a complex number given the division of two complex numbers.
+     */
     public ComplexNumber divide(ComplexNumber otherNumber) {
         newR = ((real * otherNumber.getReal()) + (img * otherNumber.getImg())) / ((otherNumber.getReal() * otherNumber.getReal()) + (otherNumber.getImg() * otherNumber.getImg()));
         newI = ((img * otherNumber.getReal()) - (real * otherNumber.getImg())) / ((otherNumber.getReal() * otherNumber.getReal()) + (otherNumber.getImg() * otherNumber.getImg()));
@@ -137,6 +147,7 @@ public class ComplexNumber {
     public String toString() {
         return "(" + String.format("%.3f", real) + ", j" + String.format("%.3f", img) + ")";
     }
+    
     /**
      * This method allows to do the addition between two complex numbers.
      * @param otherNumber, represents the second complex number to add.
@@ -155,23 +166,26 @@ public class ComplexNumber {
       * @param otherNumber, represents the second complex number to subtraction.
       * @return this method allows obtain a complex number given the substraction of two complex numbers. The new complex number
       * have the substraction of the real parts as the real part and the substraction of the imaginary oarts as the imaginary part.
-      */
-     
+      */     
      public ComplexNumber subtract(ComplexNumber otherNumber) {
         newR = real - otherNumber.getReal();
         newI = img - otherNumber.getImg();
         newComplex = new ComplexNumber(newR, newI);
         return newComplex;
     }
+     
     /**
      * This method allows to obatin a complex number with inverted signs.
      * @return this method returns a complex number whose values are those of the previous number but with the sign reversed.
-     */
-     
+     */     
       public ComplexNumber invertSign() {
         return new ComplexNumber(-this.real, -this.img);
     }
       
+    /**
+     * This method allows to obatin the square root of a complex number
+     * @return a list of complex numbers that contains the results of the square root
+     */  
     public List<ComplexNumber> sqrt() {
         List<ComplexNumber> list = new ArrayList();
         double sqrtmod = Math.sqrt(module);
