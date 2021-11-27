@@ -13,7 +13,7 @@ import javafx.collections.ObservableList;
 /**
  *
  * @author Team02
- * @param <ComplexNumber>
+ * 
  */
 public class ObservableStack<ComplexNumber> extends SimpleListProperty<ComplexNumber> {
 
