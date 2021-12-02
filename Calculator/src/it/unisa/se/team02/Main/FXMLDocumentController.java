@@ -6,6 +6,7 @@ package it.unisa.se.team02.Main;
  */
 import it.unisa.se.team02.ObservableStack.ObservableStack;
 import it.unisa.se.team02.ComplexNumber.CartesianComplex;
+import it.unisa.se.team02.ComplexNumber.*;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -400,7 +401,15 @@ public class FXMLDocumentController implements Initializable {
      */
     @FXML
     private void sqrt(ActionEvent event) {
-        
+        CartesianComplex complex = stack.pop();
+        TrigonometricComplex trigcomplex = (TrigonometricComplex) ComplexFactory.createComplex(ComplexType.TRIGONOMETRIC, complex.getReal(), complex.getImg());
+        List<CartesianComplex> list = trigcomplex.sqrt();
+        String s = "";
+        for (CartesianComplex value : list) {
+            s += value.toString() + "; ";
+            //stack.push(value);
+        }
+        outputText.setText(s);
     }
 
     /**

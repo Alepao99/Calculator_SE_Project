@@ -4,6 +4,9 @@
  */
 package it.unisa.se.team02.ComplexNumber;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Team02
@@ -39,6 +42,21 @@ public class TrigonometricComplex implements Complex{
             return Math.atan(i / r) - Math.PI;
         }
         return -1;
+    }
+    
+     /**
+     * This method allows to obatin the square root of a complex number
+     * @return a list of complex numbers that contains the results of the square root
+     */  
+        public List<CartesianComplex> sqrt() {
+        List<CartesianComplex> list = new ArrayList();
+        double sqrtmod = Math.sqrt(module);
+        for (int k = 0; k < 2; k++) {
+            double re = sqrtmod * Math.cos((fi + 2 * k * Math.PI) / 2);
+            double im = sqrtmod * Math.sin((fi + 2 * k * Math.PI) / 2);
+            list.add((CartesianComplex) ComplexFactory.createComplex(ComplexType.CARTESIAN, re, im));
+        }
+        return list;
     }
 
     @Override
