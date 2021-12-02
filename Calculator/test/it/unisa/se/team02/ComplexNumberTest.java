@@ -4,6 +4,7 @@
  */
 package it.unisa.se.team02;
 
+import it.unisa.se.team02.ComplexNumber.ComplexNumber;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;

@@ -1,9 +1,11 @@
-package it.unisa.se.team02;
+package it.unisa.se.team02.Main;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXML2.java to edit this template
  */
+import it.unisa.se.team02.ObservableStack.ObservableStack;
+import it.unisa.se.team02.ComplexNumber.ComplexNumber;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;

@@ -43,6 +43,11 @@
                                                     </VBox.margin>
                                                 </Label>
                                                 <TextField fx:id="outputText" />
+                                    <Button mnemonicParsing="false" onAction="#addOne" prefHeight="56.0" prefWidth="118.0" text="clear" />
+                                            <Button mnemonicParsing="false" onAction="#addOne" prefHeight="56.0" prefWidth="118.0" text="drop" />
+                                    <Button mnemonicParsing="false" onAction="#addOne" prefHeight="56.0" prefWidth="118.0" text="dup" />
+                                    <Button mnemonicParsing="false" onAction="#addOne" prefHeight="56.0" prefWidth="118.0" text="swap" />
+                                    <Button mnemonicParsing="false" onAction="#addOne" prefHeight="56.0" prefWidth="118.0" text="over" />
                                             </children>
                                             <padding>
                                                 <Insets right="120.0" />
@@ -88,7 +93,6 @@
                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                             </rowConstraints>
                             <children>
-                                <Button mnemonicParsing="false" onAction="#addOne" prefHeight="56.0" prefWidth="118.0" text="1" />
                                 <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#addSeven" prefHeight="59.0" prefWidth="122.0" text="7" GridPane.rowIndex="2" />
                                 <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#addEight" prefHeight="59.0" prefWidth="122.0" text="8" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                 <Button layoutX="130.0" layoutY="116.0" mnemonicParsing="false" onAction="#addNine" prefHeight="59.0" prefWidth="122.0" text="9" GridPane.columnIndex="2" GridPane.rowIndex="2" />

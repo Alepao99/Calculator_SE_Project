@@ -1,4 +1,4 @@
-package it.unisa.se.team02;
+package it.unisa.se.team02.Main;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
