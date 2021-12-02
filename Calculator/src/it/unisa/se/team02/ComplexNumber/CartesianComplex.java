@@ -12,7 +12,7 @@ import java.util.List;
  * @version n.n (gg-mm-aaaa)
  * @author Team02
  */
-public class CartesianComplex {
+public class CartesianComplex implements Complex{
     
     private double real;
     private double img;
