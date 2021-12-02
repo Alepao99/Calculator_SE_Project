@@ -4,21 +4,19 @@
  */
 package it.unisa.se.team02.ObservableStack;
 
-import java.util.LinkedList;
-import java.util.NoSuchElementException;
-import javafx.beans.property.SimpleListProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import java.util.Iterator;
+import java.util.Stack;
+import javafx.collections.ObservableListBase;
 
 /**
- * The class implements the calculator's "memory" concept using an observable LinkedList.
+ * The class implements the calculator's "memory" concept using a Stack.
  * 
  * @author Team02
  * 
  */
-public class ObservableStack<ComplexNumber> extends SimpleListProperty<ComplexNumber> {
+public class ObservableStack<E> extends ObservableListBase<E> {
 
-    private final LinkedList<ComplexNumber> stack;
+    private final Stack<E> stack;
 
     /**
      * 
@@ -26,20 +24,37 @@ public class ObservableStack<ComplexNumber> extends SimpleListProperty<ComplexNu
      * 
     */
     public ObservableStack() {
-        this.stack = new LinkedList<>();
-        this.set(FXCollections.observableList(this.stack));
+        stack = new Stack<>();
+    }
+    
+    /**
+     * 
+     * The push method puts an object within the stack
+     * 
+     * @return 
+     * Return True if the entry is successful, False otherwise.
+    */
+    public boolean push(E e) {
+        beginChange();
+        try {
+            stack.push(e);
+            nextAdd(stack.size() - 1, stack.size());
+            return true;
+        } finally {
+            endChange();
+        }
     }
 
     /**
      * 
-     * The top method returns the first element in the stack but without removing it.
+     * The peek method returns the first element in the stack but without removing it.
      * 
      * @return 
-     * Return a ComplexNumber.
+     * Return an Object.
     */
-    public ComplexNumber top() throws NoSuchElementException {
-        ComplexNumber temp = stack.peekFirst();
-        return temp;
+    public E peek(){
+        return stack.peek();
+        
     }
 
     /**
@@ -47,11 +62,30 @@ public class ObservableStack<ComplexNumber> extends SimpleListProperty<ComplexNu
      * The pop method returns the first element in the stack and remove it.
      * 
      * @return 
-     * Return a ComplexNumber.
+     * Return an Object.
     */
-    public ComplexNumber pop() throws NoSuchElementException {
-        ComplexNumber temp = stack.removeFirst();
-        return temp;
+    public E pop()  {
+        beginChange();
+        try {
+            E e = stack.pop();
+            nextRemove(stack.size() - 1, e);
+            return e;
+        } finally {
+            endChange();
+        }
+    }
 
+    @Override
+    public E get(int index) {
+        Iterator<E> iterator = stack.iterator();
+        for (int i = 0; i < index; i++) {
+            iterator.next();
+        }
+        return iterator.next();
+    }
+
+    @Override
+    public int size() {
+        return stack.size();
     }
 }

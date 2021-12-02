@@ -14,6 +14,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -343,7 +344,7 @@ public class FXMLDocumentController implements Initializable {
         CartesianComplex complex1 = stack.pop();
         CartesianComplex complex2 = stack.pop();
         stack.add(0, complex1.add(complex2));
-        setResult(stack.top());
+        setResult(stack.peek());
     }
 
     /**
@@ -358,7 +359,7 @@ public class FXMLDocumentController implements Initializable {
         CartesianComplex complex1 = stack.pop();
         CartesianComplex complex2 = stack.pop();
         stack.add(0, complex1.subtract(complex2));
-        setResult(stack.top());
+        setResult(stack.peek());
     }
 
     /**
@@ -373,7 +374,7 @@ public class FXMLDocumentController implements Initializable {
         CartesianComplex complex1 = stack.pop();
         CartesianComplex complex2 = stack.pop();
         stack.add(0, complex1.multiply(complex2));
-        setResult(stack.top());
+        setResult(stack.peek());
     }
 
     /**
@@ -389,7 +390,7 @@ public class FXMLDocumentController implements Initializable {
         CartesianComplex complex1 = stack.pop();
         CartesianComplex complex2 = stack.pop();
         stack.add(0, complex1.divide(complex2));
-        setResult(stack.top());
+        setResult(stack.peek());
     }
 
     /**
@@ -435,17 +436,12 @@ public class FXMLDocumentController implements Initializable {
     */
     @FXML
     private void push(ActionEvent event) {
-        CartesianComplex complex;
-        if (currentNumber.contains(",")) {
-            float real = Float.parseFloat(currentNumber.split(",")[0]);
-            float img = Float.parseFloat(currentNumber.split(",")[1]);
-            complex = new CartesianComplex(real, img);
-        } else {
-            float real = Float.parseFloat(currentNumber);
-            complex = new CartesianComplex(real, 0);
-        }
-        stack.add(0, complex);
-        refresh();
+        Complex complex = currentNumber.contains(",")
+        ? ComplexFactory.createComplex(ComplexType.CARTESIAN, Double.valueOf(currentNumber.split(",")[0]), Double.valueOf(currentNumber.split(",")[1]))
+        : ComplexFactory.createComplex(ComplexType.CARTESIAN, Double.valueOf(currentNumber), Double.valueOf("0"));
+        stack.push((CartesianComplex) complex);
+        refresh(); //formatto l'inputText
+        
     }
 
     /**
