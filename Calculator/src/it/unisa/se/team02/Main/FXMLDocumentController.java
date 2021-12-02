@@ -13,6 +13,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -28,14 +29,112 @@ public class FXMLDocumentController implements Initializable {
 
     private Label label;
     @FXML
-    private TextField inputText;
+    private Label inputText;
     @FXML
-    private TextField outputText;
+    private Label outputText;
     @FXML
     private ListView<ComplexNumber> mainList;
 
     ObservableStack<ComplexNumber> stack;
     private String currentNumber = "";
+    @FXML
+    private Label outputSign;
+    @FXML
+    private Button z;
+    @FXML
+    private Button m;
+    @FXML
+    private Button y;
+    @FXML
+    private Button x;
+    @FXML
+    private Button w;
+    @FXML
+    private Button l;
+    @FXML
+    private Button k;
+    @FXML
+    private Button j;
+    @FXML
+    private Button v;
+    @FXML
+    private Button i;
+    @FXML
+    private Button u;
+    @FXML
+    private Button h;
+    @FXML
+    private Button t;
+    @FXML
+    private Button g;
+    @FXML
+    private Button s;
+    @FXML
+    private Button r;
+    @FXML
+    private Button f;
+    @FXML
+    private Button e;
+    @FXML
+    private Button q;
+    @FXML
+    private Button d;
+    @FXML
+    private Button p;
+    @FXML
+    private Button o;
+    @FXML
+    private Button n;
+    @FXML
+    private Button c;
+    @FXML
+    private Button b;
+    @FXML
+    private Button a;
+    @FXML
+    private Button four;
+    @FXML
+    private Button clear;
+    @FXML
+    private Button nine;
+    @FXML
+    private Button eight;
+    @FXML
+    private Button drop;
+    @FXML
+    private Button greater;
+    @FXML
+    private Button minor;
+    @FXML
+    private Button sumVar;
+    @FXML
+    private Button seven;
+    @FXML
+    private Button over;
+    @FXML
+    private Button dup;
+    @FXML
+    private Button swap;
+    @FXML
+    private Button comma;
+    @FXML
+    private Button zero;
+    @FXML
+    private Button sign;
+    @FXML
+    private Button three;
+    @FXML
+    private Button two;
+    @FXML
+    private Button one;
+    @FXML
+    private Button six;
+    @FXML
+    private Button five;
+    @FXML
+    private Button subVar;
+    @FXML
+    private Button dot;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -50,7 +149,6 @@ public class FXMLDocumentController implements Initializable {
      *
      * @see addNumber
      */
-    @FXML
     private void addZero(ActionEvent event) {
         addNumber("0");
     }
@@ -62,7 +160,6 @@ public class FXMLDocumentController implements Initializable {
      *
      * @see addNumber
      */
-    @FXML
     private void addOne(ActionEvent event) {
         addNumber("1");
     }
@@ -74,7 +171,6 @@ public class FXMLDocumentController implements Initializable {
      *
      * @see addNumber
      */
-    @FXML
     private void addTwo(ActionEvent event) {
         addNumber("2");
     }
@@ -86,7 +182,6 @@ public class FXMLDocumentController implements Initializable {
      *
      * @see addNumber
      */
-    @FXML
     private void addThree(ActionEvent event) {
         addNumber("3");
     }
@@ -98,7 +193,6 @@ public class FXMLDocumentController implements Initializable {
      *
      * @see addNumber
      */
-    @FXML
     private void addFour(ActionEvent event) {
         addNumber("4");
     }
@@ -110,7 +204,6 @@ public class FXMLDocumentController implements Initializable {
      *
      * @see addNumber
      */
-    @FXML
     private void addFive(ActionEvent event) {
         addNumber("5");
     }
@@ -122,7 +215,6 @@ public class FXMLDocumentController implements Initializable {
      *
      * @see addNumber
      */
-    @FXML
     private void addSix(ActionEvent event) {
         addNumber("6");
     }
@@ -134,7 +226,6 @@ public class FXMLDocumentController implements Initializable {
      *
      * @see addNumber
      */
-    @FXML
     private void addSeven(ActionEvent event) {
         addNumber("7");
     }
@@ -146,7 +237,6 @@ public class FXMLDocumentController implements Initializable {
      *
      * @see addNumber
      */
-    @FXML
     private void addEight(ActionEvent event) {
         addNumber("8");
     }
@@ -158,7 +248,6 @@ public class FXMLDocumentController implements Initializable {
      *
      * @see addNumber
      */
-    @FXML
     private void addNine(ActionEvent event) {
         addNumber("9");
     }
@@ -170,7 +259,6 @@ public class FXMLDocumentController implements Initializable {
      *
      * @see addNumber
      */
-    @FXML
     private void addVirgola(ActionEvent event) {
         addNumber(",");
     }
@@ -182,7 +270,6 @@ public class FXMLDocumentController implements Initializable {
      *
      * @see addNumber
      */
-    @FXML
     private void addMeno(ActionEvent event) {
         addNumber("-");
     }
@@ -369,5 +456,21 @@ public class FXMLDocumentController implements Initializable {
         String s = currentNumber.substring(0, currentNumber.length() - 1);
         currentNumber = s;
         updateTextField();
+    }
+
+    @FXML
+    private void deleteOperationSign(ActionEvent event) {
+    }
+
+    @FXML
+    private void handleVariablesAction(ActionEvent event) {
+    }
+
+    @FXML
+    private void handleButtonAction(ActionEvent event) {
+    }
+
+    @FXML
+    private void handleManipulationCommand(ActionEvent event) {
     }
 }
