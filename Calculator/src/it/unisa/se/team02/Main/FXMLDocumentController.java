@@ -5,7 +5,7 @@ package it.unisa.se.team02.Main;
  * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXML2.java to edit this template
  */
 import it.unisa.se.team02.ObservableStack.ObservableStack;
-import it.unisa.se.team02.ComplexNumber.ComplexNumber;
+import it.unisa.se.team02.ComplexNumber.CartesianComplex;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -33,9 +33,9 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Label outputText;
     @FXML
-    private ListView<ComplexNumber> mainList;
+    private ListView<CartesianComplex> mainList;
 
-    ObservableStack<ComplexNumber> stack;
+    ObservableStack<CartesianComplex> stack;
     private String currentNumber = "";
     @FXML
     private Label outputSign;
@@ -316,7 +316,7 @@ public class FXMLDocumentController implements Initializable {
      *
      *
      */
-    public void setResult(ComplexNumber complex) {
+    public void setResult(CartesianComplex complex) {
         outputText.setText(complex.toString());
     }
 
@@ -339,8 +339,8 @@ public class FXMLDocumentController implements Initializable {
      */
     @FXML
     private void add(ActionEvent event) {
-        ComplexNumber complex1 = stack.pop();
-        ComplexNumber complex2 = stack.pop();
+        CartesianComplex complex1 = stack.pop();
+        CartesianComplex complex2 = stack.pop();
         stack.add(0, complex1.add(complex2));
         setResult(stack.top());
     }
@@ -354,8 +354,8 @@ public class FXMLDocumentController implements Initializable {
      */
     @FXML
     private void sub(ActionEvent event) {
-        ComplexNumber complex1 = stack.pop();
-        ComplexNumber complex2 = stack.pop();
+        CartesianComplex complex1 = stack.pop();
+        CartesianComplex complex2 = stack.pop();
         stack.add(0, complex1.subtract(complex2));
         setResult(stack.top());
     }
@@ -369,8 +369,8 @@ public class FXMLDocumentController implements Initializable {
      */
     @FXML
     private void multiplication(ActionEvent event) {
-        ComplexNumber complex1 = stack.pop();
-        ComplexNumber complex2 = stack.pop();
+        CartesianComplex complex1 = stack.pop();
+        CartesianComplex complex2 = stack.pop();
         stack.add(0, complex1.multiply(complex2));
         setResult(stack.top());
     }
@@ -385,8 +385,8 @@ public class FXMLDocumentController implements Initializable {
      */
     @FXML
     private void division(ActionEvent event) {
-        ComplexNumber complex1 = stack.pop();
-        ComplexNumber complex2 = stack.pop();
+        CartesianComplex complex1 = stack.pop();
+        CartesianComplex complex2 = stack.pop();
         stack.add(0, complex1.divide(complex2));
         setResult(stack.top());
     }
@@ -400,14 +400,7 @@ public class FXMLDocumentController implements Initializable {
      */
     @FXML
     private void sqrt(ActionEvent event) {
-        ComplexNumber complex = stack.pop();
-        List<ComplexNumber> list = complex.sqrt();
-        String s = "";
-        for (ComplexNumber value : list) {
-            s += value.toString() + "; ";
-            stack.add(0, value);
-        }
-        outputText.setText(s);
+        
     }
 
     /**
@@ -418,8 +411,8 @@ public class FXMLDocumentController implements Initializable {
      */
     @FXML
     private void inverterSign(ActionEvent event) {
-        ComplexNumber complex = stack.pop();
-        ComplexNumber complex1 = complex.invertSign();
+        CartesianComplex complex = stack.pop();
+        CartesianComplex complex1 = complex.invertSign();
         stack.add(0, complex1);
         outputText.setText(complex1.toString());
     }
@@ -433,14 +426,14 @@ public class FXMLDocumentController implements Initializable {
     */
     @FXML
     private void push(ActionEvent event) {
-        ComplexNumber complex;
+        CartesianComplex complex;
         if (currentNumber.contains(",")) {
             float real = Float.parseFloat(currentNumber.split(",")[0]);
             float img = Float.parseFloat(currentNumber.split(",")[1]);
-            complex = new ComplexNumber(real, img);
+            complex = new CartesianComplex(real, img);
         } else {
             float real = Float.parseFloat(currentNumber);
-            complex = new ComplexNumber(real, 0);
+            complex = new CartesianComplex(real, 0);
         }
         stack.add(0, complex);
         refresh();
