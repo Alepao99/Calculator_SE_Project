@@ -88,4 +88,16 @@ public class ObservableStack<E> extends ObservableListBase<E> {
     public int size() {
         return stack.size();
     }
+    
+    /**
+     * 
+     * The swap method reverses the last two objects on the stack.
+     * 
+    */
+    public void swap() {
+        E e1 = pop();
+        E e2 = pop();
+        push(e1);
+        push(e2);
+    }
 }
