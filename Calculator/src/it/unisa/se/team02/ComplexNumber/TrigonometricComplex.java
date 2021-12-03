@@ -11,8 +11,8 @@ import java.util.List;
  *
  * @author Team02
  */
-public class TrigonometricComplex implements Complex{
-    
+public class TrigonometricComplex implements Complex {
+
     private double r;
     private double i;
     private double module;
@@ -43,12 +43,14 @@ public class TrigonometricComplex implements Complex{
         }
         return -1;
     }
-    
-     /**
+
+    /**
      * This method allows to obatin the square root of a complex number
-     * @return a list of complex numbers that contains the results of the square root
-     */  
-        public List<CartesianComplex> sqrt() {
+     *
+     * @return a list of complex numbers that contains the results of the square
+     * root
+     */
+    public List<CartesianComplex> sqrt() {
         List<CartesianComplex> list = new ArrayList();
         double sqrtmod = Math.sqrt(module);
         for (int k = 0; k < 2; k++) {

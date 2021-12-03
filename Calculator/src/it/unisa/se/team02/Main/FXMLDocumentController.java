@@ -279,7 +279,7 @@ public class FXMLDocumentController implements Initializable {
         String s = "";
         for (CartesianComplex value : list) {
             s += value.toString() + "; ";
-            //stack.push(value);
+            stack.push(value);
         }
         outputText.setText(s);
     }
