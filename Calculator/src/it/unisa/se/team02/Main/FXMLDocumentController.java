@@ -39,8 +39,8 @@ public class FXMLDocumentController implements Initializable {
 
     ObservableStack<CartesianComplex> stack;
     private String currentNumber = "";
-     private ShowInformation info;
-     
+    private ShowInformation info;
+
     @FXML
     private Label outputSign;
     @FXML
@@ -247,10 +247,10 @@ public class FXMLDocumentController implements Initializable {
      */
     @FXML
     private void add(ActionEvent event) {
-        if(stack.size() < 2){
-            info = new ShowInformation(Alert.AlertType.ERROR, "Error","Addition", "The addition operation requires two complex numbers");
+        if (stack.size() < 2) {
+            info = new ShowInformation(Alert.AlertType.ERROR, "Error", "Addition", "The addition operation requires two complex numbers");
             info.showAlert();
-        }else{
+        } else {
             CartesianComplex[] complex = {stack.pop(), stack.pop()};
             stack.push(complex[0].add(complex[1]));
             setResult(stack.peek());
@@ -266,10 +266,10 @@ public class FXMLDocumentController implements Initializable {
      */
     @FXML
     private void sub(ActionEvent event) {
-        if(stack.size() < 2){
-            info = new ShowInformation(Alert.AlertType.ERROR, "Error","Subtraction", "The subtraction operation requires two complex numbers");
+        if (stack.size() < 2) {
+            info = new ShowInformation(Alert.AlertType.ERROR, "Error", "Subtraction", "The subtraction operation requires two complex numbers");
             info.showAlert();
-        }else{
+        } else {
             CartesianComplex[] complex = {stack.pop(), stack.pop()};
             stack.push(complex[0].subtract(complex[1]));
             setResult(stack.peek());
@@ -283,10 +283,10 @@ public class FXMLDocumentController implements Initializable {
      */
     @FXML
     private void multiplication(ActionEvent event) {
-        if(stack.size() < 2){
-            info = new ShowInformation(Alert.AlertType.ERROR, "Error","Moltiplication", "The moltiplication operation requires two complex numbers");
+        if (stack.size() < 2) {
+            info = new ShowInformation(Alert.AlertType.ERROR, "Error", "Moltiplication", "The moltiplication operation requires two complex numbers");
             info.showAlert();
-        }else{
+        } else {
             CartesianComplex[] complex = {stack.pop(), stack.pop()};
             stack.push(complex[0].multiply(complex[1]));
             setResult(stack.peek());
@@ -300,10 +300,10 @@ public class FXMLDocumentController implements Initializable {
      */
     @FXML
     private void division(ActionEvent event) {
-        if(stack.size() < 2){
-            info = new ShowInformation(Alert.AlertType.ERROR, "Error","Division", "The division operation requires two complex numbers");
+        if (stack.size() < 2) {
+            info = new ShowInformation(Alert.AlertType.ERROR, "Error", "Division", "The division operation requires two complex numbers");
             info.showAlert();
-        }else{
+        } else {
             CartesianComplex[] complex = {stack.pop(), stack.pop()};
             stack.push(complex[0].divide(complex[1]));
             setResult(stack.peek());
@@ -316,10 +316,10 @@ public class FXMLDocumentController implements Initializable {
      */
     @FXML
     private void sqrt(ActionEvent event) {
-        if(stack.size() < 1){
-            info = new ShowInformation(Alert.AlertType.ERROR, "Error","Square root", "The square root operation requires one complex numbers");
+        if (stack.size() < 1) {
+            info = new ShowInformation(Alert.AlertType.ERROR, "Error", "Square root", "The square root operation requires one complex numbers");
             info.showAlert();
-        }else{
+        } else {
             CartesianComplex complex = stack.pop();
             TrigonometricComplex trigcomplex = (TrigonometricComplex) ComplexFactory.createComplex(ComplexType.TRIGONOMETRIC, complex.getReal(), complex.getImg());
             List<CartesianComplex> list = trigcomplex.sqrt();
@@ -338,10 +338,10 @@ public class FXMLDocumentController implements Initializable {
      */
     @FXML
     private void inverterSign(ActionEvent event) {
-        if(stack.size() < 1){
-            info = new ShowInformation(Alert.AlertType.ERROR, "Error","Inverter Sign", "The inverter sign operation requires one complex numbers");
+        if (stack.size() < 1) {
+            info = new ShowInformation(Alert.AlertType.ERROR, "Error", "Inverter Sign", "The inverter sign operation requires one complex numbers");
             info.showAlert();
-        }else{
+        } else {
             CartesianComplex complex = stack.pop().invertSign();
             stack.push(complex);
             outputText.setText(complex.toString());
@@ -365,7 +365,7 @@ public class FXMLDocumentController implements Initializable {
         } else {
             info = new ShowInformation(Alert.AlertType.ERROR, "Insertion error",
                     "Please consider this insert example", "x\n-x\nx,x\n-x,x\nx,-x\n-x,-x");
-            info.showAlert(); 
+            info.showAlert();
         }
 
     }
@@ -387,7 +387,7 @@ public class FXMLDocumentController implements Initializable {
      * @return a boolean type
      */
     private boolean checkInput(String s) {
-        return s.contains(",") ? s.matches("-?[0-9]*.?[0-9]+,{1}-?[0-9]*.?[0-9]+") : s.matches("-?[0-9]*.?[0-9]+");
+        return s.contains(",") && s.chars().filter(ch -> ch == 'e').count() == 1 ? s.matches("-?[0-9]*.?[0-9]+,{1}-?[0-9]*.?[0-9]+") : s.matches("-?[0-9]*.?[0-9]+");
     }
 
     /**
