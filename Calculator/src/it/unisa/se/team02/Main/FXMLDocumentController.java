@@ -210,9 +210,8 @@ public class FXMLDocumentController implements Initializable {
      */
     @FXML
     private void add(ActionEvent event) {
-        CartesianComplex complex1 = stack.pop();
-        CartesianComplex complex2 = stack.pop();
-        stack.add(0, complex1.add(complex2));
+        CartesianComplex[] complex = {stack.pop(), stack.pop()};
+        stack.push(complex[0].add(complex[1]));
         setResult(stack.peek());
     }
 
@@ -225,9 +224,8 @@ public class FXMLDocumentController implements Initializable {
      */
     @FXML
     private void sub(ActionEvent event) {
-        CartesianComplex complex1 = stack.pop();
-        CartesianComplex complex2 = stack.pop();
-        stack.add(0, complex1.subtract(complex2));
+        CartesianComplex[] complex = {stack.pop(), stack.pop()};
+        stack.push(complex[0].subtract(complex[1]));
         setResult(stack.peek());
     }
 
@@ -240,9 +238,8 @@ public class FXMLDocumentController implements Initializable {
      */
     @FXML
     private void multiplication(ActionEvent event) {
-        CartesianComplex complex1 = stack.pop();
-        CartesianComplex complex2 = stack.pop();
-        stack.add(0, complex1.multiply(complex2));
+        CartesianComplex[] complex = {stack.pop(), stack.pop()};
+        stack.push(complex[0].multiply(complex[1]));
         setResult(stack.peek());
     }
 
@@ -256,9 +253,8 @@ public class FXMLDocumentController implements Initializable {
      */
     @FXML
     private void division(ActionEvent event) {
-        CartesianComplex complex1 = stack.pop();
-        CartesianComplex complex2 = stack.pop();
-        stack.add(0, complex1.divide(complex2));
+        CartesianComplex[] complex = {stack.pop(), stack.pop()};
+        stack.push(complex[0].divide(complex[1]));
         setResult(stack.peek());
     }
 
@@ -290,10 +286,9 @@ public class FXMLDocumentController implements Initializable {
      */
     @FXML
     private void inverterSign(ActionEvent event) {
-        CartesianComplex complex = stack.pop();
-        CartesianComplex complex1 = complex.invertSign();
-        stack.add(0, complex1);
-        outputText.setText(complex1.toString());
+        CartesianComplex complex = stack.pop().invertSign();
+        stack.push(complex);
+        outputText.setText(complex.toString());
     }
 
     /**
@@ -321,8 +316,7 @@ public class FXMLDocumentController implements Initializable {
      */
     @FXML
     private void delete(ActionEvent event) {
-        String s = currentNumber.substring(0, currentNumber.length() - 1);
-        currentNumber = s;
+        currentNumber = currentNumber.substring(0, currentNumber.length() - 1);
         updateTextField();
     }
 
