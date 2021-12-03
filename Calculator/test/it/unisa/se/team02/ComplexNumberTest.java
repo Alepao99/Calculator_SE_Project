@@ -31,23 +31,6 @@ public class ComplexNumberTest {
         assertTrue(t1.getReal() == 1);
   
     }
-    
-
-    /**
-     * Test of getModule method, of class CartesianComplex.
-     */
-    @Test
-    public void testGetModule() {
-     
-    }
-
-    /**
-     * Test of getFi method, of class CartesianComplex.
-     */
-    @Test
-    public void testGetFi() {
-      
-    }
 
     /**
      * Test of setReal method, of class CartesianComplex.
@@ -84,19 +67,27 @@ public class ComplexNumberTest {
     }
 
     /**
-     * Test of module method, of class CartesianComplex.
+     * Test of module method, of class TrigonometricComplex.
      */
     @Test
     public void testModule() {
-        
+        TrigonometricComplex t1 = new TrigonometricComplex(4, 3);
+        Double result = t1.module();
+        Double myResult = 5.0;
+        assertTrue(result.compareTo(myResult)==0);
     }
 
     /**
-     * Test of fi method, of class CartesianComplex.
+     * Test of fi method, of class TrigonometricComplex.
      */
     @Test
     public void testFi() {
-        }
+        TrigonometricComplex t1 = new TrigonometricComplex(4, 3);
+        Double result = t1.fi();
+        String resultTest = String.valueOf(result);
+        resultTest = resultTest.substring(0,5);
+        assertTrue(resultTest.compareTo("0.643")==0);
+    }
 
     /**
      * Test of multiply method, of class CartesianComplex.
