@@ -127,7 +127,7 @@ public class ComplexNumberTest {
     public void testToString() {
         CartesianComplex t1 = new CartesianComplex(1,1);
         String s1 = t1.toString();
-        String s2 = "(1,000, j1,000)";
+        String s2 = "(1,00+1,00j)";
         assertTrue(s1.compareTo(s2) == 0);
     }
 
