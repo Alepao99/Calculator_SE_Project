@@ -86,5 +86,18 @@ public class ObservableStackIT {
         assertEquals(complex1, result);
     }
     
+    @Test
+    public void testOver(){
+        System.out.println("Over");
+        CartesianComplex complex1 = new CartesianComplex(1, 1);
+        CartesianComplex complex2 = new CartesianComplex(2, 2);
+        ObservableStack<CartesianComplex> instance = new ObservableStack();
+        instance.push(complex1); 
+        instance.push(complex2); 
+        instance.over();
+        CartesianComplex result = instance.peek();
+        assertEquals(complex1, result);
+        
+    }
     
 }

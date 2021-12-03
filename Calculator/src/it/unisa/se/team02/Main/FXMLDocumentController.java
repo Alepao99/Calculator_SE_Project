@@ -240,6 +240,15 @@ public class FXMLDocumentController implements Initializable {
                 return;
             }
         }
+        if (source == over) {
+            if (stack.size() < 2) {
+                info = new ShowInformation(Alert.AlertType.ERROR, "Error", "Over", "The over operation requires two complex numbers");
+                info.showAlert();
+            } else {
+                stack.over();
+                return;
+            }
+        }
     }
 
     /**

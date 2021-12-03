@@ -101,9 +101,13 @@ public class ObservableStack<E> extends ObservableListBase<E> {
         push(e2);
     }
 
-     public void drop() {
+    public void drop() {
         this.pop();
     }
 
+    public void over() {
+        E e = stack.get(stack.size() - 2);
+        push(e);
+    }
 
 }
