@@ -249,6 +249,15 @@ public class FXMLDocumentController implements Initializable {
                 return;
             }
         }
+        if (source == dup) {
+            if (stack.size() < 1) {
+                info = new ShowInformation(Alert.AlertType.ERROR, "Error", "Duplicate", "The dup operation requires one complex numbers");
+                info.showAlert();
+            } else {
+            stack.dup();
+            return;
+            }
+        }
     }
 
     /**
