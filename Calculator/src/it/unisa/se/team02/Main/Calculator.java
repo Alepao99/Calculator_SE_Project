@@ -25,7 +25,7 @@ public class Calculator extends Application {
         Scene scene = new Scene(root);
         stage.setResizable(true);
         stage.setTitle("Calculator Complex");
-        stage.getIcons().add(new Image(getClass().getResource("/it/unisa/se/team02/StyleCalculator/Calculator-icon.png").toExternalForm()));
+        stage.getIcons().add(new Image(getClass().getResource("/it/unisa/se/team02/StyleCalculator/CalculatorIcon.png").toExternalForm()));
         scene.getStylesheets().add("/it/unisa/se/team02/StyleCalculator/ApplicationStyle.css");
         stage.initStyle(StageStyle.UTILITY);
         stage.setScene(scene);

@@ -303,11 +303,15 @@ public class FXMLDocumentController implements Initializable {
      */
     @FXML
     private void push(ActionEvent event) {
-        Complex complex = currentNumber.contains(",")
-                ? ComplexFactory.createComplex(ComplexType.CARTESIAN, Double.valueOf(currentNumber.split(",")[0]), Double.valueOf(currentNumber.split(",")[1]))
-                : ComplexFactory.createComplex(ComplexType.CARTESIAN, Double.valueOf(currentNumber), Double.valueOf("0"));
-        stack.push((CartesianComplex) complex);
-        refresh(); //formatto l'inputText
+        if (checkInput(currentNumber)) {
+            Complex complex = currentNumber.contains(",")
+                    ? ComplexFactory.createComplex(ComplexType.CARTESIAN, Double.valueOf(currentNumber.split(",")[0]), Double.valueOf(currentNumber.split(",")[1]))
+                    : ComplexFactory.createComplex(ComplexType.CARTESIAN, Double.valueOf(currentNumber), Double.valueOf("0"));
+            stack.push((CartesianComplex) complex);
+            refresh(); //formatto l'inputText
+        } else {
+            //Insert alert class 
+        }
 
     }
 
@@ -319,6 +323,16 @@ public class FXMLDocumentController implements Initializable {
     private void delete(ActionEvent event) {
         currentNumber = currentNumber.substring(0, currentNumber.length() - 1);
         updateTextField();
+    }
+
+    /**
+     * This method allows to understand if the entered text is correct
+     *
+     * @param s String
+     * @return a boolean type
+     */
+    private boolean checkInput(String s) {
+        return s.contains(",") ? s.matches("-?[0-9]*.?[0-9]+,{1}-?[0-9]*.?[0-9]+") : s.matches("-?[0-9]*.?[0-9]+");
     }
 
     /**
