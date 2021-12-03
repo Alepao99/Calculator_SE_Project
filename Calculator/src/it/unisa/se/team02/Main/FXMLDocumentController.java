@@ -387,7 +387,7 @@ public class FXMLDocumentController implements Initializable {
      * @return a boolean type
      */
     private boolean checkInput(String s) {
-        return s.contains(",") && s.chars().filter(ch -> ch == 'e').count() == 1 ? s.matches("-?[0-9]*.?[0-9]+,{1}-?[0-9]*.?[0-9]+") : s.matches("-?[0-9]*.?[0-9]+");
+        return s.contains(",") && s.chars().filter(ch -> ch == ',').count() == 1 ? s.matches("-?[0-9]*.?[0-9]+,{1}-?[0-9]*.?[0-9]+") : s.matches("-?[0-9]*.?[0-9]+");
     }
 
     /**
