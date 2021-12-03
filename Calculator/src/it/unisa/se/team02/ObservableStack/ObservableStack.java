@@ -100,4 +100,10 @@ public class ObservableStack<E> extends ObservableListBase<E> {
         push(e1);
         push(e2);
     }
+
+     public void drop() {
+        this.pop();
+    }
+
+
 }

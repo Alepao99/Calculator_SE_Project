@@ -77,4 +77,14 @@ public class ObservableStackIT {
         
     }
 
+    @Test
+    public void testDrop(){
+        ObservableStack<CartesianComplex> instance = new ObservableStack();
+        CartesianComplex complex1 = new CartesianComplex(1, 1);
+        instance.push(complex1);
+        CartesianComplex result = instance.pop();
+        assertEquals(complex1, result);
+    }
+    
+    
 }

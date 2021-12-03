@@ -220,6 +220,10 @@ public class FXMLDocumentController implements Initializable {
             stack.swap();
             return;
         }
+           if (source == drop) {
+            stack.drop();
+            return;
+        }
     }
 
     /**
