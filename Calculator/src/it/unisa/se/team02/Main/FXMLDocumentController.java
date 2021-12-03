@@ -14,11 +14,9 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
 
 /**
  * This class allows you to interact with the application interface by capturing
@@ -144,15 +142,21 @@ public class FXMLDocumentController implements Initializable {
         mainList.setItems(stack);
     }
 
+    /**
+     * This method allows you to enter the complex number by clicking on the
+     * button
+     *
+     * @param event
+     */
     @FXML
     private void handleButtonAction(ActionEvent event) {
         Button source = (Button) event.getSource();
         if (source == comma) {
-            //addVirgola();
+            addComma();
             return;
         }
         if (source == sign) {
-            //addMeno();
+            addLess();
             return;
         }
         if (source == dot) {
@@ -201,12 +205,22 @@ public class FXMLDocumentController implements Initializable {
         }
     }
 
+    @FXML
+    private void deleteOperationSign(ActionEvent event) {
+    }
+
+    @FXML
+    private void handleVariablesAction(ActionEvent event) {
+    }
+
+    @FXML
+    private void handleManipulationCommand(ActionEvent event) {
+    }
+
     /**
-     *
      * This method performs the addition operation between the two complex
      * numbers at the top of the stack and updates the top of the stack with the
      * result of the operation
-     *
      */
     @FXML
     private void add(ActionEvent event) {
@@ -230,11 +244,9 @@ public class FXMLDocumentController implements Initializable {
     }
 
     /**
-     *
      * This method performs the multiplication operation between the two complex
      * numbers at the top of the stack and updates the top of the stack with the
      * result of the operation
-     *
      */
     @FXML
     private void multiplication(ActionEvent event) {
@@ -244,12 +256,9 @@ public class FXMLDocumentController implements Initializable {
     }
 
     /**
-     *
-     *
      * This method performs the division operation between the two complex
      * numbers at the top of the stack and updates the top of the stack with the
      * result of the operation
-     *
      */
     @FXML
     private void division(ActionEvent event) {
@@ -259,11 +268,8 @@ public class FXMLDocumentController implements Initializable {
     }
 
     /**
-     *
-     *
      * This method performs the sqrt operation with a complex number and updates
      * the top of the stack with the result of the operation
-     *
      */
     @FXML
     private void sqrt(ActionEvent event) {
@@ -279,10 +285,8 @@ public class FXMLDocumentController implements Initializable {
     }
 
     /**
-     *
      * This method inverts the signs of the real and imaginary part of the
      * complex number
-     *
      */
     @FXML
     private void inverterSign(ActionEvent event) {
@@ -292,12 +296,10 @@ public class FXMLDocumentController implements Initializable {
     }
 
     /**
-     *
      * The push method creates a ComplexNumber starting from the string inserted
      * in input via the interface, stored in the variable "currentNumber". It
      * then adds the new ComplexNumber to the Stack and calls the refresh ()
      * method. Return Void.
-     *
      */
     @FXML
     private void push(ActionEvent event) {
@@ -310,8 +312,7 @@ public class FXMLDocumentController implements Initializable {
     }
 
     /**
-     *
-     * This method allows the deletion of a character and / or number from the
+     * This method allows the deletion of a character or number from the
      * inpuText, updating the current number
      */
     @FXML
@@ -320,25 +321,10 @@ public class FXMLDocumentController implements Initializable {
         updateTextField();
     }
 
-    @FXML
-    private void deleteOperationSign(ActionEvent event) {
-    }
-
-    @FXML
-    private void handleVariablesAction(ActionEvent event) {
-    }
-
-    @FXML
-    private void handleManipulationCommand(ActionEvent event) {
-    }
-
     /**
-     *
      * This method concatenates the correct number and updates the input text
      *
      * @param character number or character that is captured by the user
-     *
-     *
      */
     public void addChar(String character) {
         currentNumber += character;
@@ -346,7 +332,6 @@ public class FXMLDocumentController implements Initializable {
     }
 
     /**
-     *
      * The refresh method initializes the variable "currentNumber" and calls the
      * updateTextField() method. Return Void.
      *
@@ -358,23 +343,18 @@ public class FXMLDocumentController implements Initializable {
     }
 
     /**
-     *
      * The updateTextField method sets the content of the variable
      * "currentNumber" in the input area of ​​the interface. Return Void.
-     *
      */
     public void updateTextField() {
         inputText.setText(currentNumber);
     }
 
     /**
-     *
      * This method updates the output text with the result of an operation
      *
      * @param complex this parameter contains the result of the operation and is
      * a complex number
-     *
-     *
      */
     public void setResult(CartesianComplex complex) {
         outputText.setText(complex.toString());
@@ -388,5 +368,35 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void quitApplication(ActionEvent event) {
         Platform.exit();
+    }
+
+    /**
+     * This method allows me to insert comma to separate the real part and the
+     * imaginary part when entering the complex number
+     */
+    private void addComma() {
+        if (currentNumber.length() == 0) {
+            //Insert alert class fow show problems
+        } else if (currentNumber.lastIndexOf(",") == currentNumber.length() - 1) {
+            currentNumber = currentNumber.substring(0, currentNumber.length() - 1);
+            updateTextField();
+        } else {
+            addChar(",");
+        }
+    }
+
+    /**
+     * This method allows you to enter the minus in order to have negative
+     * numbers
+     */
+    private void addLess() {
+        if (currentNumber.length() == 0) {
+            addChar("-");
+        } else if (currentNumber.lastIndexOf("-") == currentNumber.length() - 1) {
+            currentNumber = currentNumber.substring(0, currentNumber.length() - 1);
+            updateTextField();
+        } else {
+            addChar("-");
+        }
     }
 }
