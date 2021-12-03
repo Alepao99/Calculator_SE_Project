@@ -139,6 +139,8 @@ public class FXMLDocumentController implements Initializable {
     private Button subVar;
     @FXML
     private Button dot;
+    @FXML
+    private ListView<?> variableList;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
