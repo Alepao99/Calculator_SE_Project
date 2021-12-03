@@ -49,6 +49,9 @@ public class ObservableStackIT {
 
     }
     
+    /**
+     * Test of push method, of class ObservableStack.
+     */
     @Test
     public void testPush() {
         System.out.println("push");
@@ -61,6 +64,9 @@ public class ObservableStackIT {
 
     }
     
+    /**
+     * Test of swap method, of class ObservableStack.
+     */
     @Test
     public void testSwap() {
         System.out.println("Swap");
@@ -77,6 +83,9 @@ public class ObservableStackIT {
         
     }
 
+    /**
+     * Test of drop method, of class ObservableStack.
+     */
     @Test
     public void testDrop(){
         ObservableStack<CartesianComplex> instance = new ObservableStack();
@@ -86,6 +95,9 @@ public class ObservableStackIT {
         assertEquals(complex1, result);
     }
     
+    /**
+     * Test of over method, of class ObservableStack.
+     */
     @Test
     public void testOver(){
         System.out.println("Over");

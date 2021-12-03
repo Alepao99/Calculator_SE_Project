@@ -101,10 +101,20 @@ public class ObservableStack<E> extends ObservableListBase<E> {
         push(e2);
     }
 
+    /**
+     *
+     * The drop method removes the last element of the stack
+     *
+     */
     public void drop() {
         this.pop();
     }
 
+    /**
+     *
+     * The over method pushes a copy of the second last element of the stack
+     *
+     */
     public void over() {
         E e = stack.get(stack.size() - 2);
         push(e);
