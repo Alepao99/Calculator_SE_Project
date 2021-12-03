@@ -4,6 +4,7 @@ package it.unisa.se.team02.Main;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXML2.java to edit this template
  */
+import it.unisa.se.team02.Alert.ShowInformation;
 import it.unisa.se.team02.ObservableStack.ObservableStack;
 import it.unisa.se.team02.ComplexNumber.CartesianComplex;
 import it.unisa.se.team02.ComplexNumber.*;
@@ -14,6 +15,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -37,6 +39,8 @@ public class FXMLDocumentController implements Initializable {
 
     ObservableStack<CartesianComplex> stack;
     private String currentNumber = "";
+     private ShowInformation info;
+     
     @FXML
     private Label outputSign;
     @FXML
@@ -319,7 +323,9 @@ public class FXMLDocumentController implements Initializable {
             stack.push((CartesianComplex) complex);
             refresh(); //formatto l'inputText
         } else {
-            //Insert alert class 
+            info = new ShowInformation(Alert.AlertType.ERROR, "Insertion error",
+                    "Please consider this insert example", "x\n-x\nx,x\n-x,x\nx,-x\n-x,-x");
+            info.showAlert(); 
         }
 
     }
