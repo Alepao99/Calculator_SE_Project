@@ -60,5 +60,21 @@ public class ObservableStackIT {
         assertEquals(expResult, result);
 
     }
+    
+    @Test
+    public void testSwap() {
+        System.out.println("Swap");
+        CartesianComplex complex1 = new CartesianComplex(1, 1);
+        CartesianComplex complex2 = new CartesianComplex(2, 2);
+        ObservableStack<CartesianComplex> instance = new ObservableStack();
+        instance.push(complex1); 
+        instance.push(complex2); 
+        instance.swap();
+        CartesianComplex result = instance.pop();
+        CartesianComplex result1 = instance.pop();
+        assertEquals(complex1, result);
+        assertEquals(complex2, result1);
+        
+    }
 
 }

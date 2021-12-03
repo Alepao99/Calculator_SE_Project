@@ -215,6 +215,11 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void handleManipulationCommand(ActionEvent event) {
+         Button source = (Button) event.getSource();
+          if (source == swap) {
+            stack.swap();
+            return;
+        }
     }
 
     /**
