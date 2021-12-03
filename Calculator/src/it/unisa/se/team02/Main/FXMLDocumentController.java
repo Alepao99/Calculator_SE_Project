@@ -144,60 +144,61 @@ public class FXMLDocumentController implements Initializable {
         mainList.setItems(stack);
     }
 
-    /**
-     *
-     * This method concatenates the correct number and updates the input text
-     *
-     * @param character number or character that is captured by the user
-     * 
-     *
-     */
-    public void addNumber(String character) {
-        currentNumber += character;
-        updateTextField();
-    }
-
-    /**
-     * 
-     * The refresh method initializes the variable "currentNumber" and calls the updateTextField() method. Return Void.
-     * 
-     * @see updateTextField
-    */
-    private void refresh() {
-        currentNumber = "";
-        updateTextField();
-    }
-
-    /**
-     * 
-     * The updateTextField method sets the content of the variable "currentNumber" in the input area of ​​the interface. Return Void.
-     * 
-    */
-    public void updateTextField() {
-        inputText.setText(currentNumber);
-    }
-
-    /**
-     *
-     * This method updates the output text with the result of an operation
-     *
-     * @param complex this parameter contains the result of the operation and is
-     * a complex number
-     *
-     *
-     */
-    public void setResult(CartesianComplex complex) {
-        outputText.setText(complex.toString());
-    }
-
-    /**
-     *
-     * This method close the application
-     *
-     */
     @FXML
-    private void quitApplication(ActionEvent event) {
-        Platform.exit();
+    private void handleButtonAction(ActionEvent event) {
+        Button source = (Button) event.getSource();
+        if (source == comma) {
+            //addVirgola();
+            return;
+        }
+        if (source == sign) {
+            //addMeno();
+            return;
+        }
+        if (source == dot) {
+            addChar(".");
+            return;
+        }
+        if (source == zero) {
+            addChar("0");
+            return;
+        }
+        if (source == one) {
+            addChar("1");
+            return;
+        }
+        if (source == two) {
+            addChar("2");
+            return;
+        }
+        if (source == three) {
+            addChar("3");
+            return;
+        }
+        if (source == four) {
+            addChar("4");
+            return;
+        }
+        if (source == five) {
+            addChar("5");
+            return;
+        }
+        if (source == six) {
+            addChar("6");
+            return;
+        }
+        if (source == seven) {
+            addChar("7");
+            return;
+        }
+        if (source == eight) {
+            addChar("8");
+            return;
+        }
+        if (source == nine) {
+            addChar("9");
+            return;
+        }
     }
 
     /**
@@ -295,21 +296,22 @@ public class FXMLDocumentController implements Initializable {
         outputText.setText(complex1.toString());
     }
 
-   /**
-    * 
-    * The push method creates a ComplexNumber starting from the string inserted in input via the interface,
-    * stored in the variable "currentNumber". It then adds the new ComplexNumber to the Stack and calls the refresh () method.
-    * Return Void.
-    * 
-    */
+    /**
+     *
+     * The push method creates a ComplexNumber starting from the string inserted
+     * in input via the interface, stored in the variable "currentNumber". It
+     * then adds the new ComplexNumber to the Stack and calls the refresh ()
+     * method. Return Void.
+     *
+     */
     @FXML
     private void push(ActionEvent event) {
         Complex complex = currentNumber.contains(",")
-        ? ComplexFactory.createComplex(ComplexType.CARTESIAN, Double.valueOf(currentNumber.split(",")[0]), Double.valueOf(currentNumber.split(",")[1]))
-        : ComplexFactory.createComplex(ComplexType.CARTESIAN, Double.valueOf(currentNumber), Double.valueOf("0"));
+                ? ComplexFactory.createComplex(ComplexType.CARTESIAN, Double.valueOf(currentNumber.split(",")[0]), Double.valueOf(currentNumber.split(",")[1]))
+                : ComplexFactory.createComplex(ComplexType.CARTESIAN, Double.valueOf(currentNumber), Double.valueOf("0"));
         stack.push((CartesianComplex) complex);
         refresh(); //formatto l'inputText
-        
+
     }
 
     /**
@@ -333,10 +335,64 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
-    private void handleButtonAction(ActionEvent event) {
+    private void handleManipulationCommand(ActionEvent event) {
     }
 
+    /**
+     *
+     * This method concatenates the correct number and updates the input text
+     *
+     * @param character number or character that is captured by the user
+     *
+     *
+     */
+    public void addChar(String character) {
+        currentNumber += character;
+        updateTextField();
+    }
+
+    /**
+     *
+     * The refresh method initializes the variable "currentNumber" and calls the
+     * updateTextField() method. Return Void.
+     *
+     * @see updateTextField
+     */
+    private void refresh() {
+        currentNumber = "";
+        updateTextField();
+    }
+
+    /**
+     *
+     * The updateTextField method sets the content of the variable
+     * "currentNumber" in the input area of ​​the interface. Return Void.
+     *
+     */
+    public void updateTextField() {
+        inputText.setText(currentNumber);
+    }
+
+    /**
+     *
+     * This method updates the output text with the result of an operation
+     *
+     * @param complex this parameter contains the result of the operation and is
+     * a complex number
+     *
+     *
+     */
+    public void setResult(CartesianComplex complex) {
+        outputText.setText(complex.toString());
+    }
+
+    /**
+     *
+     * This method close the application
+     *
+     */
     @FXML
-    private void handleManipulationCommand(ActionEvent event) {//fare bottoni ed eliminare le vecchie
+    private void quitApplication(ActionEvent event) {
+        Platform.exit();
     }
 }
