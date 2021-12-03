@@ -4,6 +4,7 @@
  */
 package it.unisa.se.team02.ObservableStack;
 
+import it.unisa.se.team02.ComplexNumber.CartesianComplex;
 import java.util.Iterator;
 import java.util.Stack;
 import javafx.collections.ObservableListBase;
@@ -118,6 +119,16 @@ public class ObservableStack<E> extends ObservableListBase<E> {
     public void over() {
         E e = stack.get(stack.size() - 2);
         push(e);
+    }
+    
+    /**
+     *
+     * The dup method duplucates the last complex number placed on the stack
+     *
+     */
+    public void dup() {
+        E e = this.peek();
+        this.push(e);
     }
 
 }

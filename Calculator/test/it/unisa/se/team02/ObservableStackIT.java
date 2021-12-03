@@ -112,4 +112,15 @@ public class ObservableStackIT {
         
     }
     
+    @Test
+    public void testDup(){
+        System.out.println("Dup");
+        CartesianComplex complex1 = new CartesianComplex(1, 1);
+        ObservableStack<CartesianComplex> instance = new ObservableStack();
+        instance.push(complex1);
+        instance.dup();  
+        CartesianComplex result = instance.peek();
+        assertEquals(complex1, result);    
+    }
+    
 }
