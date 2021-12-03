@@ -53,6 +53,27 @@ public class ComplexNumberTest {
         assertTrue(t1.getImg() == 1);
          
     }
+    
+        /**
+     * Test of setReal method, of class TrigonometricComplex.
+     */
+    @Test
+    public void testGetRealTrig() {
+        TrigonometricComplex t1 = new TrigonometricComplex(1,1);        
+        assertTrue(t1.getReal() == 1);
+    
+    }
+
+    /**
+     * Test of getImg method, of class TrigonometricComplex.
+     */
+    @Test
+    public void testGetImgTrig() {
+        
+        TrigonometricComplex t1 = new TrigonometricComplex(1,3);
+        assertTrue(t1.getImg() == 3);
+         
+    }
 
     /**
      * Test of setImg method, of class CartesianComplex.
