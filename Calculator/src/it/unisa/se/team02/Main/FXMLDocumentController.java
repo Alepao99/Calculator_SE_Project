@@ -9,6 +9,7 @@ import it.unisa.se.team02.ObservableStack.ObservableStack;
 import it.unisa.se.team02.ComplexNumber.CartesianComplex;
 import it.unisa.se.team02.ComplexNumber.*;
 import it.unisa.se.team02.Main.VariablesActions.Azione;
+import it.unisa.se.team02.Main.VariablesActions.Greater;
 import it.unisa.se.team02.Main.VariablesActions.Menu;
 import it.unisa.se.team02.Main.VariablesActions.Minor;
 import java.net.URL;
@@ -235,6 +236,12 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void handleVariablesAction(ActionEvent event) {
         Button source = (Button) event.getSource();
+        if (source == greater) {
+            currentSign += ">";
+            updateOutputSign();
+            op.setCommand(greater, new Greater());
+            return;
+        }
         if ( source == minor){
              currentSign += "<";
             updateOutputSign();
