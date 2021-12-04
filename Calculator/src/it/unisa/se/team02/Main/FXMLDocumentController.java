@@ -8,8 +8,13 @@ import it.unisa.se.team02.Alert.ShowInformation;
 import it.unisa.se.team02.ObservableStack.ObservableStack;
 import it.unisa.se.team02.ComplexNumber.CartesianComplex;
 import it.unisa.se.team02.ComplexNumber.*;
+import it.unisa.se.team02.Main.VariablesActions.Azione;
+import it.unisa.se.team02.Main.VariablesActions.Menu;
+import it.unisa.se.team02.Main.VariablesActions.Minor;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -36,10 +41,12 @@ public class FXMLDocumentController implements Initializable {
     private Label outputText;
     @FXML
     private ListView<CartesianComplex> mainList;
-
+    private Menu op;
+    private Map<Button, CartesianComplex> map;
     ObservableStack<CartesianComplex> stack;
     private String currentNumber = "";
     private ShowInformation info;
+    private String currentSign ="";
 
     @FXML
     private Label outputSign;
@@ -146,6 +153,8 @@ public class FXMLDocumentController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         stack = new ObservableStack<>();
         mainList.setItems(stack);
+        map = new HashMap<>();
+        op = new Menu();
     }
 
     /**
@@ -211,12 +220,38 @@ public class FXMLDocumentController implements Initializable {
         }
     }
 
+    private void updateOutputSign(){
+        outputSign.setText(currentSign);
+    }    
+    
     @FXML
     private void deleteOperationSign(ActionEvent event) {
+    op.removeAction();
+        currentSign = currentSign.substring(0, currentSign.length() - 1);
+        updateOutputSign();
+    
     }
 
     @FXML
     private void handleVariablesAction(ActionEvent event) {
+        Button source = (Button) event.getSource();
+        if ( source == minor){
+             currentSign += "<";
+            updateOutputSign();
+            op.setCommand(minor, new Minor());
+            return;
+        }
+        
+        if (source.getId().matches("[a-z]")) {
+            if (op.isEmpty() == false) {
+                Azione azione = op.takeAction();
+                currentSign = currentSign.substring(1);
+                updateOutputSign();
+                azione.getCommand().execute(stack, source, map);
+                outputText.setText(source.getId() + ":" + map.get(source));
+            }
+            return;
+        }
     }
 
     @FXML
