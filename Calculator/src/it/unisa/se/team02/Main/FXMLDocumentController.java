@@ -18,6 +18,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.MapChangeListener;
+import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -43,7 +47,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private ListView<CartesianComplex> mainList;
     private Menu op;
-    private Map<Button, CartesianComplex> map;
+    private ObservableMap<Button,CartesianComplex> map;
     ObservableStack<CartesianComplex> stack;
     private String currentNumber = "";
     private ShowInformation info;
@@ -148,16 +152,41 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Button dot;
     @FXML
-    private ListView<?> variableList;
+    private ListView<VarEvent> variableList;
+    private ObservableList<VarEvent> events;
+    private Button Btn;
+    private MapChangeListener<Button,CartesianComplex> listener =  null;
+    
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         stack = new ObservableStack<>();
         mainList.setItems(stack);
-        map = new HashMap<>();
+        map = FXCollections.observableHashMap();
+        events = FXCollections.observableArrayList();
+        inizialize();
+        variableList.setItems(events);
         op = new Menu();
+    
+        listener =  new MapChangeListener<Button, CartesianComplex>() {
+            @Override
+            public void onChanged(MapChangeListener.Change<? extends Button, ? extends CartesianComplex> ch) {
+                System.out.println("Map update");
+                      events.set((int)(Btn.getId().charAt(0))-97, new VarEvent(Btn.getId().charAt(0), map.get(Btn)));
+                outputText.setText(Btn.getId() + ":" + map.get(Btn));
+          
+            }
+        };
+            map.addListener(listener);
     }
 
+        private void inizialize() {
+        for (int i = 0; i < 26; i++) {
+            events.add(new VarEvent((char)(97 + i), new CartesianComplex(0, 0)));
+        }
+    }
+    
+    
     /**
      * This method allows you to enter the complex number by clicking on the
      * button
@@ -236,6 +265,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void handleVariablesAction(ActionEvent event) {
         Button source = (Button) event.getSource();
+        this.Btn=source;
         if (source == greater) {
             currentSign += ">";
             updateOutputSign();
@@ -255,7 +285,6 @@ public class FXMLDocumentController implements Initializable {
                 currentSign = currentSign.substring(1);
                 updateOutputSign();
                 azione.getCommand().execute(stack, source, map);
-                outputText.setText(source.getId() + ":" + map.get(source));
             }
             return;
         }
