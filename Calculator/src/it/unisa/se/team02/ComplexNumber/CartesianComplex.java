@@ -37,7 +37,6 @@ public class CartesianComplex implements Complex {
      *
      * @return this method return a double through a simple return
      */
-
     public double getReal() {
         return real;
     }
@@ -69,7 +68,6 @@ public class CartesianComplex implements Complex {
      * part of the complex number. this method allows to set the imaginary part
      * of a complex number through a simple assignement.
      */
-
     public void setImg(double img) {
         this.img = img;
     }
@@ -109,7 +107,8 @@ public class CartesianComplex implements Complex {
      */
     @Override
     public String toString() {
-        return "(" + String.format("%.2f", real) + "+" + String.format("%.2f", img) + "j)";
+        return img > 0 ? "(" + String.format("%.2f", real) + "+" + String.format("%.2f", img) + "j)"
+                : "(" + String.format("%.2f", real) + String.format("%.2f", img) + "j)";
     }
 
     /**
