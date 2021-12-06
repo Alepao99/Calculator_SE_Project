@@ -37,7 +37,8 @@ import javafx.scene.control.ListView;
  */
 public class FXMLDocumentController implements Initializable {
 
-    private Label label;
+    private final byte characterAMinChar = 97;
+    private final byte alphabetLenght = 26;
     @FXML
     private Label inputText;
     @FXML
@@ -45,11 +46,11 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private ListView<CartesianComplex> mainList;
     private Menu op;
-    private ObservableMap<Button,CartesianComplex> map;
+    private ObservableMap<Button, CartesianComplex> map;
     ObservableStack<CartesianComplex> stack;
     private String currentNumber = "";
     private ShowInformation info;
-    private String currentSign ="";
+    private String currentSign = "";
 
     @FXML
     private Label outputSign;
@@ -153,8 +154,7 @@ public class FXMLDocumentController implements Initializable {
     private ListView<VarEvent> variableList;
     private ObservableList<VarEvent> events;
     private Button Btn;
-    private MapChangeListener<Button,CartesianComplex> listener =  null;
-    
+    private MapChangeListener<Button, CartesianComplex> listener = null;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -165,26 +165,25 @@ public class FXMLDocumentController implements Initializable {
         inizialize();
         variableList.setItems(events);
         op = new Menu();
-    
-        listener =  new MapChangeListener<Button, CartesianComplex>() {
+
+        listener = new MapChangeListener<Button, CartesianComplex>() {
             @Override
             public void onChanged(MapChangeListener.Change<? extends Button, ? extends CartesianComplex> ch) {
                 System.out.println("Map update");
-                      events.set((int)(Btn.getId().charAt(0))-97, new VarEvent(Btn.getId().charAt(0), map.get(Btn)));
+                events.set((int) (Btn.getId().charAt(0)) - characterAMinChar, new VarEvent(Btn.getId().charAt(0), map.get(Btn)));
                 outputText.setText(Btn.getId() + ":" + map.get(Btn));
-          
+
             }
         };
-            map.addListener(listener);
+        map.addListener(listener);
     }
 
-        private void inizialize() {
-        for (int i = 0; i < 26; i++) {
-            events.add(new VarEvent((char)(97 + i), new CartesianComplex(0, 0)));
+    private void inizialize() {
+        for (int i = 0; i < alphabetLenght; i++) {
+            events.add(new VarEvent((char) (characterAMinChar + i), new CartesianComplex(0, 0)));
         }
     }
-    
-    
+
     /**
      * This method allows you to enter the complex number by clicking on the
      * button
@@ -248,35 +247,35 @@ public class FXMLDocumentController implements Initializable {
         }
     }
 
-    private void updateOutputSign(){
+    private void updateOutputSign() {
         outputSign.setText(currentSign);
-    }    
-    
+    }
+
     @FXML
     private void deleteOperationSign(ActionEvent event) {
-    op.removeAction();
+        op.removeAction();
         currentSign = currentSign.substring(0, currentSign.length() - 1);
         updateOutputSign();
-    
+
     }
 
     @FXML
     private void handleVariablesAction(ActionEvent event) {
         Button source = (Button) event.getSource();
-        this.Btn=source;
+        this.Btn = source;
         if (source == greater) {
             currentSign += ">";
             updateOutputSign();
             op.setCommand(greater, new Greater());
             return;
         }
-        if ( source == minor){
-             currentSign += "<";
+        if (source == minor) {
+            currentSign += "<";
             updateOutputSign();
             op.setCommand(minor, new Minor());
             return;
         }
-        
+
         if (source.getId().matches("[a-z]")) {
             if (op.isEmpty() == false) {
                 Azione azione = op.takeAction();
