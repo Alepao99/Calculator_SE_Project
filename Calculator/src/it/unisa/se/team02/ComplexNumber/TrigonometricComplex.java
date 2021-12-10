@@ -56,6 +56,16 @@ public class TrigonometricComplex implements Complex {
         }
         return list;
     }
+         
+    /**
+     * This method allows to obatin the log of a complex number
+     *
+     * @return a complex number that contains the results of the log
+     *
+     */
+    public CartesianComplex log() {
+        return new CartesianComplex(Math.log(module), fi);
+    }
 
     @Override
     public double getReal() {
