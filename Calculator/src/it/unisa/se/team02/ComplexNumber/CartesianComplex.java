@@ -168,4 +168,13 @@ public class CartesianComplex implements Complex {
         return new CartesianComplex(Math.cos(real) * Math.cosh(img), -Math.sin(real) * Math.sinh(img));
     }
 
+    /**
+     * This method allows to obatin the tan of a complex number
+     *
+     * @return a complex number that contains the results of the tan
+     *
+     */
+    public CartesianComplex tan() {
+        return sin().divide(cos());
+    }
 }

@@ -275,7 +275,21 @@ public class ComplexNumberTest {
         assertTrue(real1.compareTo("-4.18") == 0);
         assertTrue(img1.compareTo("-9.10") == 0);
     }
-
+    
+    /**
+     * Test of Tan method, of class CartesianComplex.
+     */
+    @Test
+    public void testTan() {
+        CartesianComplex t1 = new CartesianComplex(2, 3);
+        CartesianComplex result = t1.tan();
+        String real1 = String.valueOf(result.getReal());
+        real1 = real1.substring(0, 6);
+        String img1 = String.valueOf(result.getImg());
+        img1 = img1.substring(0, 6);
+        assertTrue(real1.compareTo("-0.003") == 0);
+        assertTrue(img1.compareTo("1.0032") == 0);
+    }
 
 
 
