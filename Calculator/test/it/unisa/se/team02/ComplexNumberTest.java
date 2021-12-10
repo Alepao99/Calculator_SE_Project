@@ -199,4 +199,19 @@ public class ComplexNumberTest {
         assertTrue(img1.compareTo("0.895") == 0);
         assertTrue(img2.compareTo("-0.895") == 0);
     }
+    
+    /**
+     * Test of Sin method, of class CartesianComplex.
+     */
+    @Test
+    public void testSin() {
+        CartesianComplex t1 = new CartesianComplex(2, 3);
+        CartesianComplex result = t1.sin();
+        String real1 = String.valueOf(result.getReal());
+        real1 = real1.substring(0, 5);
+        String img1 = String.valueOf(result.getImg());
+        img1 = img1.substring(0, 5);
+        assertTrue(real1.compareTo("9.154") == 0);
+        assertTrue(img1.compareTo("-4.16") == 0);
+    }
 }

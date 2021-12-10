@@ -147,5 +147,15 @@ public class CartesianComplex implements Complex {
     public CartesianComplex invertSign() {
         return new CartesianComplex(-this.real, -this.img);
     }
+    
+    /**
+     * This method allows to obatin the sin of a complex number
+     *
+     * @return a complex number that contains the results of the sin
+     *
+     */
+    public CartesianComplex sin() {
+        return new CartesianComplex(Math.sin(real) * Math.cosh(img), Math.cos(real) * Math.sinh(img));
+    }
 
 }
