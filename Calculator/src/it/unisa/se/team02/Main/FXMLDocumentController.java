@@ -8,10 +8,7 @@ import it.unisa.se.team02.Alert.ShowInformation;
 import it.unisa.se.team02.ObservableStack.ObservableStack;
 import it.unisa.se.team02.ComplexNumber.CartesianComplex;
 import it.unisa.se.team02.ComplexNumber.*;
-import it.unisa.se.team02.Operation.Azione;
-import it.unisa.se.team02.VariablesActions.Greater;
 import it.unisa.se.team02.Operation.Menu;
-import it.unisa.se.team02.VariablesActions.Minor;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -27,6 +24,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 
 /**
  * This class allows you to interact with the application interface by capturing
@@ -155,6 +156,56 @@ public class FXMLDocumentController implements Initializable {
     private ObservableList<VarEvent> events;
     private Button Btn;
     private MapChangeListener<Button, CartesianComplex> listener = null;
+    @FXML
+    private TableView<?> tableFunc;
+    @FXML
+    private TableColumn<?, ?> nameCln;
+    @FXML
+    private TableColumn<?, ?> commandCln;
+    @FXML
+    private Button loadFunc;
+    @FXML
+    private Button saveFunc;
+    @FXML
+    private TextField nameFunc;
+    @FXML
+    private Button pow;
+    @FXML
+    private Button atan;
+    @FXML
+    private Button acos;
+    @FXML
+    private Button asin;
+    @FXML
+    private Button log;
+    @FXML
+    private Button mod;
+    @FXML
+    private Button arg;
+    @FXML
+    private Button exp;
+    @FXML
+    private Button saveVariables;
+    @FXML
+    private Button restoreCommand;
+    @FXML
+    private Button cos;
+    @FXML
+    private Button sin;
+    @FXML
+    private Button tan;
+    @FXML
+    private Button multi;
+    @FXML
+    private Button sub;
+    @FXML
+    private Button division;
+    @FXML
+    private Button inverterSign;
+    @FXML
+    private Button add;
+    @FXML
+    private Button sqrt;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -265,7 +316,6 @@ public class FXMLDocumentController implements Initializable {
     }
     
 
-    @FXML
     private void handleManipulationCommand(ActionEvent event) {
         Button source = (Button) event.getSource();
         if (source == swap) {
@@ -317,7 +367,6 @@ public class FXMLDocumentController implements Initializable {
      * numbers at the top of the stack and updates the top of the stack with the
      * result of the operation
      */
-    @FXML
     private void add(ActionEvent event) {
         if (stack.size() < 2) {
             info = new ShowInformation(Alert.AlertType.ERROR, "Error", "Addition", "The addition operation requires two complex numbers");
@@ -336,7 +385,6 @@ public class FXMLDocumentController implements Initializable {
      * result of the operation
      *
      */
-    @FXML
     private void sub(ActionEvent event) {
         if (stack.size() < 2) {
             info = new ShowInformation(Alert.AlertType.ERROR, "Error", "Subtraction", "The subtraction operation requires two complex numbers");
@@ -353,7 +401,6 @@ public class FXMLDocumentController implements Initializable {
      * numbers at the top of the stack and updates the top of the stack with the
      * result of the operation
      */
-    @FXML
     private void multiplication(ActionEvent event) {
         if (stack.size() < 2) {
             info = new ShowInformation(Alert.AlertType.ERROR, "Error", "Moltiplication", "The moltiplication operation requires two complex numbers");
@@ -370,7 +417,6 @@ public class FXMLDocumentController implements Initializable {
      * numbers at the top of the stack and updates the top of the stack with the
      * result of the operation
      */
-    @FXML
     private void division(ActionEvent event) {
         if (stack.size() < 2) {
             info = new ShowInformation(Alert.AlertType.ERROR, "Error", "Division", "The division operation requires two complex numbers");
@@ -386,7 +432,6 @@ public class FXMLDocumentController implements Initializable {
      * This method performs the sqrt operation with a complex number and updates
      * the top of the stack with the result of the operation
      */
-    @FXML
     private void sqrt(ActionEvent event) {
         if (stack.size() < 1) {
             info = new ShowInformation(Alert.AlertType.ERROR, "Error", "Square root", "The square root operation requires one complex numbers");
@@ -408,7 +453,6 @@ public class FXMLDocumentController implements Initializable {
      * This method inverts the signs of the real and imaginary part of the
      * complex number
      */
-    @FXML
     private void inverterSign(ActionEvent event) {
         if (stack.size() < 1) {
             info = new ShowInformation(Alert.AlertType.ERROR, "Error", "Inverter Sign", "The inverter sign operation requires one complex numbers");
@@ -539,5 +583,41 @@ public class FXMLDocumentController implements Initializable {
         } else {
             addChar("-");
         }
+    }
+
+    @FXML
+    private void deleteFunc(ActionEvent event) {
+    }
+
+    @FXML
+    private void viewFunc(MouseEvent event) {
+    }
+
+    @FXML
+    private void modifyFunc(ActionEvent event) {
+    }
+
+    @FXML
+    private void createFunc(ActionEvent event) {
+    }
+
+    @FXML
+    private void handleFunctionCommand(ActionEvent event) {
+    }
+
+    @FXML
+    private void handleTrigonometricCommand(ActionEvent event) {
+    }
+
+    @FXML
+    private void handleVariablesCommand(ActionEvent event) {
+    }
+
+    @FXML
+    private void execute(ActionEvent event) {
+    }
+
+    @FXML
+    private void handleOperationCommand(ActionEvent event) {
     }
 }
