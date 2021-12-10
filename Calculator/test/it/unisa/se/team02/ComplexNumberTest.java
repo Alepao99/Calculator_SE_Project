@@ -260,6 +260,21 @@ public class ComplexNumberTest {
         assertTrue(real1.compareTo("0.570") == 0);
         assertTrue(img1.compareTo("1.983") == 0);   
     }
+    
+     /**
+     * Test of Cos method, of class CartesianComplex.
+     */
+    @Test
+    public void testCos() {
+        CartesianComplex t1 = new CartesianComplex(2, 3);
+        CartesianComplex result = t1.cos();
+        String real1 = String.valueOf(result.getReal());
+        real1 = real1.substring(0, 5);
+        String img1 = String.valueOf(result.getImg());
+        img1 = img1.substring(0, 5);
+        assertTrue(real1.compareTo("-4.18") == 0);
+        assertTrue(img1.compareTo("-9.10") == 0);
+    }
 
 
 
