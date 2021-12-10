@@ -66,7 +66,56 @@ public class TrigonometricComplex implements Complex {
     public CartesianComplex log() {
         return new CartesianComplex(Math.log(module), fi);
     }
+     /**
+     * This method allows to obatin the pow of a complex number
+     *
+     * @return a complex number that contains the results of the pow
+     *
+     */
+    public CartesianComplex pow(int n) {
+        double modNew = Math.pow(module, n);
+        double fiNew = fi * n;
+        return new CartesianComplex(modNew * Math.cos(fiNew), modNew * Math.sin(fiNew));
+    }
 
+    /**
+     * This method allows to obatin the asin of a complex number
+     *
+     * @return a complex number that contains the results of the asin
+     *
+     */
+    public CartesianComplex asin() {
+        // asin(z) = -i (log(sqrt(1 - z2) + iz))
+        // creo z
+        TrigonometricComplex numberT = new TrigonometricComplex(this.r, this.i);
+        // creo z^2
+        CartesianComplex nPow = numberT.pow(2);
+        // creo 1
+        CartesianComplex num = new CartesianComplex(1, 0);
+        //creo 1-z^2
+        CartesianComplex nSub = num.subtract(nPow);
+        TrigonometricComplex x = new TrigonometricComplex(nSub.getReal(),nSub.getImg());
+        //creo sqrt(1-z^2)
+        List<CartesianComplex> nSqrt = x.sqrt();
+        CartesianComplex nSqrt2 = nSqrt.get(0);
+        //creo un numero complesso 0+1i
+        CartesianComplex nNum = new CartesianComplex(0, 1);
+        // creo il prodotto i*z
+        CartesianComplex nProd = nNum.multiply(new CartesianComplex(this.r,this.i));
+        // somma all'interno del log
+        CartesianComplex nSum = nProd.add(nSqrt2);
+        // log
+        TrigonometricComplex x2 = new TrigonometricComplex(nSum.getReal(),nSum.getImg());
+        CartesianComplex nLog = x2.log();
+        //creo un numero complesso 0-1i
+        CartesianComplex nNum2 = new CartesianComplex(0, -1);
+        // prodotto tra -i e tutto il resto
+        CartesianComplex nFinal = nNum2.multiply(nLog);
+        return nFinal;
+    }
+    
+    
+    
     @Override
     public double getReal() {
         return r;

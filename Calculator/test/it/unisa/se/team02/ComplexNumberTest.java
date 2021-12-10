@@ -228,5 +228,40 @@ public class ComplexNumberTest {
         img1 = img1.substring(0, 5);
         assertTrue(real1.compareTo("1.282") == 0);
         assertTrue(img1.compareTo("0.982") == 0);  
+  
     }
+
+    /**
+     * Test of Pow method, of class TrigonometricComplex.
+     */
+    @Test
+    public void testPow() {
+        TrigonometricComplex t1 = new TrigonometricComplex(2, 3);
+        CartesianComplex result = t1.pow(3);
+        String real1 = String.valueOf(result.getReal());
+        real1 = real1.substring(0, 5);
+        String img1 = String.valueOf(result.getImg());
+        img1 = img1.substring(0, 5);
+        assertTrue(real1.compareTo("-45.9") == 0);
+        assertTrue(img1.compareTo("9.000") == 0);        
+    }
+
+    /**
+     * Test of Asin method, of class TrigonometricComplex.
+     */
+    @Test
+    public void testAsin() {
+        TrigonometricComplex t1 = new TrigonometricComplex(2, 3);
+        CartesianComplex result = t1.asin();
+        String real1 = String.valueOf(result.getReal());
+        real1 = real1.substring(0, 5);
+        String img1 = String.valueOf(result.getImg());
+        img1 = img1.substring(0, 5);
+        assertTrue(real1.compareTo("0.570") == 0);
+        assertTrue(img1.compareTo("1.983") == 0);   
+    }
+
+
+
+
 }

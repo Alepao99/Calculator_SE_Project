@@ -13,6 +13,10 @@ public abstract class Operation {
     public void doOperation(ObservableStack<CartesianComplex> stack) {
     }
 
+     public void doOperation(ObservableStack<CartesianComplex> stack, int n) {
+    }
+
+    
     public char executeVariable(ObservableStack<CartesianComplex> stack, Map<Character, CartesianComplex> map, Menu menu) {
         return 0;
     }

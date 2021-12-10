@@ -1,0 +1,29 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package it.unisa.se.team02.TrascendentalFunctions;
+
+import it.unisa.se.team02.ComplexNumber.CartesianComplex;
+import it.unisa.se.team02.ComplexNumber.ComplexFactory;
+import it.unisa.se.team02.ComplexNumber.ComplexType;
+import it.unisa.se.team02.ComplexNumber.TrigonometricComplex;
+import it.unisa.se.team02.ObservableStack.ObservableStack;
+import it.unisa.se.team02.Operation.Operation;
+
+/**
+ *
+ * @author Francesco
+ */
+public class Pow extends Operation{
+
+    @Override
+    public void doOperation(ObservableStack<CartesianComplex> stack, int n) {
+         CartesianComplex complex = stack.pop();
+        TrigonometricComplex trigcomplex = (TrigonometricComplex) ComplexFactory.createComplex(ComplexType.TRIGONOMETRIC, complex.getReal(), complex.getImg());
+        CartesianComplex result = trigcomplex.pow(n);
+        stack.push(result);
+    }
+
+    
+}
