@@ -1,3 +1,6 @@
+/*
+    Stylesheet for button objects in our GUI
+*/
 
 .root {
     /* set the base grey/dark tint */
@@ -79,13 +82,12 @@
     -fx-background-color:  black;
     -fx-background-radius: 3;
     -fx-background-insets: 0;
+    -fx-text-fill: white;
 }
 
 .text-field{
-    -fx-font-family: Consolas;
-    -fx-background-color:  #2E303E;
-    -fx-text-box-border: transparent;
-    -fx-border-color:transparent;
-    -fx-text-fill: #d7dae0;
+    -fx-background-color:  black;
+    -fx-background-radius: 3;
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
 }
-

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package it.unisa.se.team02.ButtonAction;
 
 import it.unisa.se.team02.Alert.ShowInformation;
@@ -9,7 +5,7 @@ import javafx.scene.control.Alert;
 
 /**
  *
- * @author aless
+ * @author Team02
  */
 public class Comma implements Creation {
 

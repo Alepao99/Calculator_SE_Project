@@ -1,16 +1,11 @@
 package it.unisa.se.team02.Main;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXML2.java to edit this template
- */
 import it.unisa.se.team02.Alert.ShowInformation;
 import it.unisa.se.team02.ObservableStack.ObservableStack;
 import it.unisa.se.team02.ComplexNumber.CartesianComplex;
 import it.unisa.se.team02.ComplexNumber.*;
 import it.unisa.se.team02.Operation.Menu;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -40,21 +35,38 @@ public class FXMLDocumentController implements Initializable {
 
     private final byte characterAMinChar = 97;
     private final byte alphabetLenght = 26;
+
+    //This label allows you to view complex input numbers
     @FXML
     private Label inputText;
+    //This label allows you to view complex output numbers
     @FXML
     private Label outputText;
+
+    //Lista che contiene i numeri complessi dello stack 
     @FXML
     private ListView<CartesianComplex> mainList;
-    private Menu op;
+    private ObservableStack<CartesianComplex> stack;
+
+    //Menu che ha al suo interno la lista dei comandi da eseguire in quel momento
+    private Menu menu;
+
+    //Mappa che associa la variabile al rispettivo valore complesso EX -> >a
     private ObservableMap<Button, CartesianComplex> map;
-    ObservableStack<CartesianComplex> stack;
+
+    //Numero corrente
     private String currentNumber = "";
-    private ShowInformation info;
+    //Comando corrente
     private String currentSign = "";
 
+    //CLasse che mostra gli allert
+    private ShowInformation info;
+
+    //This label allows you to view commands to execute on complex values
     @FXML
     private Label outputSign;
+
+    //Variables
     @FXML
     private Button z;
     @FXML
@@ -107,32 +119,16 @@ public class FXMLDocumentController implements Initializable {
     private Button b;
     @FXML
     private Button a;
+
+    //Buttons
     @FXML
     private Button four;
-    @FXML
-    private Button clear;
     @FXML
     private Button nine;
     @FXML
     private Button eight;
     @FXML
-    private Button drop;
-    @FXML
-    private Button greater;
-    @FXML
-    private Button minor;
-    @FXML
-    private Button sumVar;
-    @FXML
     private Button seven;
-    @FXML
-    private Button over;
-    @FXML
-    private Button dup;
-    @FXML
-    private Button swap;
-    @FXML
-    private Button comma;
     @FXML
     private Button zero;
     @FXML
@@ -148,14 +144,38 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Button five;
     @FXML
-    private Button subVar;
-    @FXML
     private Button dot;
     @FXML
+    private Button comma;
+    //Lista che contiene i valori delle variabili
+    @FXML
     private ListView<VarEvent> variableList;
+    //Lista osservabile che ha i valori delle variabili
     private ObservableList<VarEvent> events;
-    private Button Btn;
-    private MapChangeListener<Button, CartesianComplex> listener = null;
+
+    //Bottoni che lavorano sulle variabili
+    @FXML
+    private Button subVar;
+    @FXML
+    private Button greater;
+    @FXML
+    private Button minor;
+    @FXML
+    private Button sumVar;
+
+    //BOttoni che lavorano sui valori dello stack
+    @FXML
+    private Button drop;
+    @FXML
+    private Button over;
+    @FXML
+    private Button dup;
+    @FXML
+    private Button swap;
+    @FXML
+    private Button clear;
+
+    //Tabella che salva il nome e la lista di comandi della funzione
     @FXML
     private TableView<?> tableFunc;
     @FXML
@@ -168,6 +188,8 @@ public class FXMLDocumentController implements Initializable {
     private Button saveFunc;
     @FXML
     private TextField nameFunc;
+
+    //bottoni che abilitano le operazioni trigonometriche
     @FXML
     private Button pow;
     @FXML
@@ -185,15 +207,13 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Button exp;
     @FXML
-    private Button saveVariables;
-    @FXML
-    private Button restoreCommand;
-    @FXML
     private Button cos;
     @FXML
     private Button sin;
     @FXML
     private Button tan;
+
+    //bottoni che abilitano le operazioni classiche 
     @FXML
     private Button multi;
     @FXML
@@ -207,15 +227,27 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Button sqrt;
 
+    //Bottoni di salvataggio e ripristino delle variabili
+    @FXML
+    private Button saveVariables;
+    @FXML
+    private Button restoreCommand;
+
+    private Button Btn;
+    private MapChangeListener<Button, CartesianComplex> listener = null;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         stack = new ObservableStack<>();
-        mainList.setItems(stack);
+        menu = new Menu();
+
         map = FXCollections.observableHashMap();
         events = FXCollections.observableArrayList();
+        
         inizialize();
+        
         variableList.setItems(events);
-        op = new Menu();
+        mainList.setItems(stack);
 
         listener = new MapChangeListener<Button, CartesianComplex>() {
             @Override
@@ -243,225 +275,60 @@ public class FXMLDocumentController implements Initializable {
      */
     @FXML
     private void handleButtonAction(ActionEvent event) {
-        Button source = (Button) event.getSource();
-        if (source == comma) {
-            addComma();
-            return;
-        }
-        if (source == sign) {
-            addLess();
-            return;
-        }
-        if (source == dot) {
-            addChar(".");
-            return;
-        }
-        if (source == zero) {
-            addChar("0");
-            return;
-        }
-        if (source == one) {
-            addChar("1");
-            return;
-        }
-        if (source == two) {
-            addChar("2");
-            return;
-        }
-        if (source == three) {
-            addChar("3");
-            return;
-        }
-        if (source == four) {
-            addChar("4");
-            return;
-        }
-        if (source == five) {
-            addChar("5");
-            return;
-        }
-        if (source == six) {
-            addChar("6");
-            return;
-        }
-        if (source == seven) {
-            addChar("7");
-            return;
-        }
-        if (source == eight) {
-            addChar("8");
-            return;
-        }
-        if (source == nine) {
-            addChar("9");
-            return;
-        }
+
     }
 
-    private void updateOutputSign() {
-        outputSign.setText(currentSign);
+    /**
+     * This method allows you to capture alphanumeric buttons
+     *
+     * @param event
+     */
+    @FXML
+    private void handleVariablesCommand(ActionEvent event) {
+    }
+
+    /**
+     * This method allows you to create complex operation
+     *
+     * @param event
+     */
+    @FXML
+    private void handleOperationCommand(ActionEvent event) {
+    }
+
+    /**
+     * This method allows you to create Function complex operation
+     *
+     * @param event
+     */
+    @FXML
+    private void handleFunctionCommand(ActionEvent event) {
+    }
+
+    /**
+     * This method allows you to perform all Trigonometric complex operation
+     *
+     * @param event
+     */
+    @FXML
+    private void handleTrigonometricCommand(ActionEvent event) {
     }
 
     @FXML
     private void deleteOperationSign(ActionEvent event) {
-        op.removeAction();
+        menu.removeAction();
         currentSign = currentSign.substring(0, currentSign.length() - 1);
         updateOutputSign();
 
     }
 
+    /**
+     *
+     * @param event
+     */
     @FXML
     private void handleVariablesAction(ActionEvent event) {
         //to modify
-    }
-    
-
-    private void handleManipulationCommand(ActionEvent event) {
-        Button source = (Button) event.getSource();
-        if (source == swap) {
-            if (stack.size() < 2) {
-                info = new ShowInformation(Alert.AlertType.ERROR, "Error", "Swap", "The swap operation requires two complex numbers");
-                info.showAlert();
-            } else {
-                stack.swap();
-                return;
-            }
-        }
-        if (source == drop) {
-            if (stack.size() < 1) {
-                info = new ShowInformation(Alert.AlertType.ERROR, "Error", "Drop", "The drop operation requires two complex numbers");
-                info.showAlert();
-            } else {
-                stack.drop();
-                return;
-            }
-        }
-        if (source == over) {
-            if (stack.size() < 2) {
-                info = new ShowInformation(Alert.AlertType.ERROR, "Error", "Over", "The over operation requires two complex numbers");
-                info.showAlert();
-            } else {
-                stack.over();
-                return;
-            }
-        }
-        if (source == dup) {
-            if (stack.size() < 1) {
-                info = new ShowInformation(Alert.AlertType.ERROR, "Error", "Duplicate", "The dup operation requires one complex numbers");
-                info.showAlert();
-            } else {
-                stack.dup();
-                return;
-            }
-        }
-        if (source == clear) {
-            stack.clear();
-            refresh();
-            outputText.setText(currentNumber);
-            return;
-        }
-    }
-
-    /**
-     * This method performs the addition operation between the two complex
-     * numbers at the top of the stack and updates the top of the stack with the
-     * result of the operation
-     */
-    private void add(ActionEvent event) {
-        if (stack.size() < 2) {
-            info = new ShowInformation(Alert.AlertType.ERROR, "Error", "Addition", "The addition operation requires two complex numbers");
-            info.showAlert();
-        } else {
-            CartesianComplex[] complex = {stack.pop(), stack.pop()};
-            stack.push(complex[0].add(complex[1]));
-            setResult(stack.peek());
-        }
-    }
-
-    /**
-     *
-     * This method performs the subtraction operation between the two complex
-     * numbers at the top of the stack and updates the top of the stack with the
-     * result of the operation
-     *
-     */
-    private void sub(ActionEvent event) {
-        if (stack.size() < 2) {
-            info = new ShowInformation(Alert.AlertType.ERROR, "Error", "Subtraction", "The subtraction operation requires two complex numbers");
-            info.showAlert();
-        } else {
-            CartesianComplex[] complex = {stack.pop(), stack.pop()};
-            stack.push(complex[0].subtract(complex[1]));
-            setResult(stack.peek());
-        }
-    }
-
-    /**
-     * This method performs the multiplication operation between the two complex
-     * numbers at the top of the stack and updates the top of the stack with the
-     * result of the operation
-     */
-    private void multiplication(ActionEvent event) {
-        if (stack.size() < 2) {
-            info = new ShowInformation(Alert.AlertType.ERROR, "Error", "Moltiplication", "The moltiplication operation requires two complex numbers");
-            info.showAlert();
-        } else {
-            CartesianComplex[] complex = {stack.pop(), stack.pop()};
-            stack.push(complex[0].multiply(complex[1]));
-            setResult(stack.peek());
-        }
-    }
-
-    /**
-     * This method performs the division operation between the two complex
-     * numbers at the top of the stack and updates the top of the stack with the
-     * result of the operation
-     */
-    private void division(ActionEvent event) {
-        if (stack.size() < 2) {
-            info = new ShowInformation(Alert.AlertType.ERROR, "Error", "Division", "The division operation requires two complex numbers");
-            info.showAlert();
-        } else {
-            CartesianComplex[] complex = {stack.pop(), stack.pop()};
-            stack.push(complex[0].divide(complex[1]));
-            setResult(stack.peek());
-        }
-    }
-
-    /**
-     * This method performs the sqrt operation with a complex number and updates
-     * the top of the stack with the result of the operation
-     */
-    private void sqrt(ActionEvent event) {
-        if (stack.size() < 1) {
-            info = new ShowInformation(Alert.AlertType.ERROR, "Error", "Square root", "The square root operation requires one complex numbers");
-            info.showAlert();
-        } else {
-            CartesianComplex complex = stack.pop();
-            TrigonometricComplex trigcomplex = (TrigonometricComplex) ComplexFactory.createComplex(ComplexType.TRIGONOMETRIC, complex.getReal(), complex.getImg());
-            List<CartesianComplex> list = trigcomplex.sqrt();
-            String s = "";
-            for (CartesianComplex value : list) {
-                s += value.toString() + "; ";
-                stack.push(value);
-            }
-            outputText.setText(s);
-        }
-    }
-
-    /**
-     * This method inverts the signs of the real and imaginary part of the
-     * complex number
-     */
-    private void inverterSign(ActionEvent event) {
-        if (stack.size() < 1) {
-            info = new ShowInformation(Alert.AlertType.ERROR, "Error", "Inverter Sign", "The inverter sign operation requires one complex numbers");
-            info.showAlert();
-        } else {
-            CartesianComplex complex = stack.pop().invertSign();
-            stack.push(complex);
-            outputText.setText(complex.toString());
-        }
     }
 
     /**
@@ -469,6 +336,8 @@ public class FXMLDocumentController implements Initializable {
      * in input via the interface, stored in the variable "currentNumber". It
      * then adds the new ComplexNumber to the Stack and calls the refresh ()
      * method. Return Void.
+     *
+     * @param event
      */
     @FXML
     private void push(ActionEvent event) {
@@ -489,11 +358,69 @@ public class FXMLDocumentController implements Initializable {
     /**
      * This method allows the deletion of a character or number from the
      * inpuText, updating the current number
+     *
+     * @param event
      */
     @FXML
     private void delete(ActionEvent event) {
         currentNumber = currentNumber.substring(0, currentNumber.length() - 1);
         updateTextField();
+    }
+
+    /**
+     * This method allows to close the application
+     *
+     * @param event
+     */
+    @FXML
+    private void quitApplication(ActionEvent event) {
+        Platform.exit();
+    }
+
+    /**
+     * This method allows you to delete the function created
+     *
+     * @param event
+     */
+    @FXML
+    private void deleteFunc(ActionEvent event) {
+    }
+
+    /**
+     * This method allows you to see the function created
+     *
+     * @param event
+     */
+    @FXML
+    private void viewFunc(MouseEvent event) {
+    }
+
+    /**
+     * This method allows you to modify the function created by creating a new
+     * function
+     *
+     * @param event
+     */
+    @FXML
+    private void modifyFunc(ActionEvent event) {
+    }
+
+    /**
+     * This method allows you to create a new function complex
+     *
+     * @param event
+     */
+    @FXML
+    private void createFunc(ActionEvent event) {
+    }
+
+    /**
+     * This method allows you to execute a function complex
+     *
+     * @param event
+     */
+    @FXML
+    private void execute(ActionEvent event) {
     }
 
     /**
@@ -545,79 +472,8 @@ public class FXMLDocumentController implements Initializable {
         outputText.setText(complex.toString());
     }
 
-    /**
-     *
-     * This method close the application
-     *
-     */
-    @FXML
-    private void quitApplication(ActionEvent event) {
-        Platform.exit();
+    private void updateOutputSign() {
+        outputSign.setText(currentSign);
     }
 
-    /**
-     * This method allows me to insert comma to separate the real part and the
-     * imaginary part when entering the complex number
-     */
-    private void addComma() {
-        if (currentNumber.length() == 0) {
-            //Insert alert class fow show problems
-        } else if (currentNumber.lastIndexOf(",") == currentNumber.length() - 1) {
-            currentNumber = currentNumber.substring(0, currentNumber.length() - 1);
-            updateTextField();
-        } else {
-            addChar(",");
-        }
-    }
-
-    /**
-     * This method allows you to enter the minus in order to have negative
-     * numbers
-     */
-    private void addLess() {
-        if (currentNumber.length() == 0) {
-            addChar("-");
-        } else if (currentNumber.lastIndexOf("-") == currentNumber.length() - 1) {
-            currentNumber = currentNumber.substring(0, currentNumber.length() - 1);
-            updateTextField();
-        } else {
-            addChar("-");
-        }
-    }
-
-    @FXML
-    private void deleteFunc(ActionEvent event) {
-    }
-
-    @FXML
-    private void viewFunc(MouseEvent event) {
-    }
-
-    @FXML
-    private void modifyFunc(ActionEvent event) {
-    }
-
-    @FXML
-    private void createFunc(ActionEvent event) {
-    }
-
-    @FXML
-    private void handleFunctionCommand(ActionEvent event) {
-    }
-
-    @FXML
-    private void handleTrigonometricCommand(ActionEvent event) {
-    }
-
-    @FXML
-    private void handleVariablesCommand(ActionEvent event) {
-    }
-
-    @FXML
-    private void execute(ActionEvent event) {
-    }
-
-    @FXML
-    private void handleOperationCommand(ActionEvent event) {
-    }
 }
