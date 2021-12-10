@@ -13,7 +13,9 @@ public class ObservableStackIT {
 
     public ObservableStackIT() {
     }
-
+    /**
+     * Test of peek method, of class ObservableStack.
+     */
     @Test
     public void testPeek() {
         System.out.println("peek");
@@ -44,7 +46,7 @@ public class ObservableStackIT {
         assertEquals(expResult, result);
 
     }
-    
+
     /**
      * Test of push method, of class ObservableStack.
      */
@@ -59,7 +61,7 @@ public class ObservableStackIT {
         assertEquals(expResult, result);
 
     }
-    
+
     /**
      * Test of swap method, of class ObservableStack.
      */
@@ -69,54 +71,57 @@ public class ObservableStackIT {
         CartesianComplex complex1 = new CartesianComplex(1, 1);
         CartesianComplex complex2 = new CartesianComplex(2, 2);
         ObservableStack<CartesianComplex> instance = new ObservableStack();
-        instance.push(complex1); 
-        instance.push(complex2); 
+        instance.push(complex1);
+        instance.push(complex2);
         instance.swap();
         CartesianComplex result = instance.pop();
         CartesianComplex result1 = instance.pop();
         assertEquals(complex1, result);
         assertEquals(complex2, result1);
-        
+
     }
 
     /**
      * Test of drop method, of class ObservableStack.
      */
     @Test
-    public void testDrop(){
+    public void testDrop() {
         ObservableStack<CartesianComplex> instance = new ObservableStack();
         CartesianComplex complex1 = new CartesianComplex(1, 1);
         instance.push(complex1);
         CartesianComplex result = instance.pop();
         assertEquals(complex1, result);
     }
-    
+
     /**
      * Test of over method, of class ObservableStack.
      */
     @Test
-    public void testOver(){
+    public void testOver() {
         System.out.println("Over");
         CartesianComplex complex1 = new CartesianComplex(1, 1);
         CartesianComplex complex2 = new CartesianComplex(2, 2);
         ObservableStack<CartesianComplex> instance = new ObservableStack();
-        instance.push(complex1); 
-        instance.push(complex2); 
+        instance.push(complex1);
+        instance.push(complex2);
         instance.over();
         CartesianComplex result = instance.peek();
         assertEquals(complex1, result);
-        
+
     }
-    
+
+    /**
+     * Test of Dup method, of class ObservableStack.
+     */
     @Test
-    public void testDup(){
+    public void testDup() {
         System.out.println("Dup");
         CartesianComplex complex1 = new CartesianComplex(1, 1);
         ObservableStack<CartesianComplex> instance = new ObservableStack();
         instance.push(complex1);
-        instance.dup();  
+        instance.dup();
         CartesianComplex result = instance.peek();
-        assertEquals(complex1, result);    
+        assertEquals(complex1, result);
     }
-    
+
 }

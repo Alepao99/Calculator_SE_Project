@@ -11,9 +11,9 @@ import static org.junit.Assert.*;
  * @author Team02
  */
 public class ComplexNumberTest {
-    
+
     public ComplexNumberTest() {
-        
+
     }
 
     /**
@@ -21,10 +21,10 @@ public class ComplexNumberTest {
      */
     @Test
     public void testGetReal() {
-        
-        CartesianComplex t1 = new CartesianComplex(1,1);
+
+        CartesianComplex t1 = new CartesianComplex(1, 1);
         assertTrue(t1.getReal() == 1);
-  
+
     }
 
     /**
@@ -32,10 +32,10 @@ public class ComplexNumberTest {
      */
     @Test
     public void testSetReal() {
-        CartesianComplex t1 = new CartesianComplex(1,1);
+        CartesianComplex t1 = new CartesianComplex(1, 1);
         t1.setReal(5);
         assertTrue(t1.getReal() == 5);
-    
+
     }
 
     /**
@@ -43,20 +43,20 @@ public class ComplexNumberTest {
      */
     @Test
     public void testGetImg() {
-        
-        CartesianComplex t1 = new CartesianComplex(1,1);
+
+        CartesianComplex t1 = new CartesianComplex(1, 1);
         assertTrue(t1.getImg() == 1);
-         
+
     }
-    
-        /**
+
+    /**
      * Test of setReal method, of class TrigonometricComplex.
      */
     @Test
     public void testGetRealTrig() {
-        TrigonometricComplex t1 = new TrigonometricComplex(1,1);        
+        TrigonometricComplex t1 = new TrigonometricComplex(1, 1);
         assertTrue(t1.getReal() == 1);
-    
+
     }
 
     /**
@@ -64,10 +64,10 @@ public class ComplexNumberTest {
      */
     @Test
     public void testGetImgTrig() {
-        
-        TrigonometricComplex t1 = new TrigonometricComplex(1,3);
+
+        TrigonometricComplex t1 = new TrigonometricComplex(1, 3);
         assertTrue(t1.getImg() == 3);
-         
+
     }
 
     /**
@@ -75,11 +75,11 @@ public class ComplexNumberTest {
      */
     @Test
     public void testSetImg() {
-    
-         CartesianComplex t1 = new CartesianComplex(1,1);
+
+        CartesianComplex t1 = new CartesianComplex(1, 1);
         t1.setImg(5);
-        assertTrue(t1.getImg()== 5);
-    
+        assertTrue(t1.getImg() == 5);
+
     }
 
     /**
@@ -90,7 +90,7 @@ public class ComplexNumberTest {
         TrigonometricComplex t1 = new TrigonometricComplex(4, 3);
         Double result = t1.module();
         Double myResult = 5.0;
-        assertTrue(result.compareTo(myResult)==0);
+        assertTrue(result.compareTo(myResult) == 0);
     }
 
     /**
@@ -101,8 +101,8 @@ public class ComplexNumberTest {
         TrigonometricComplex t1 = new TrigonometricComplex(4, 3);
         Double result = t1.fi();
         String resultTest = String.valueOf(result);
-        resultTest = resultTest.substring(0,5);
-        assertTrue(resultTest.compareTo("0.643")==0);
+        resultTest = resultTest.substring(0, 5);
+        assertTrue(resultTest.compareTo("0.643") == 0);
     }
 
     /**
@@ -110,10 +110,10 @@ public class ComplexNumberTest {
      */
     @Test
     public void testMultiply() {
-        CartesianComplex t1 = new CartesianComplex(1,1);
-        CartesianComplex t2 = new CartesianComplex(2,2);
+        CartesianComplex t1 = new CartesianComplex(1, 1);
+        CartesianComplex t2 = new CartesianComplex(2, 2);
         CartesianComplex result = t1.multiply(t2);
-        assertTrue((result.getReal() == 0) && (result.getImg() == 4));        
+        assertTrue((result.getReal() == 0) && (result.getImg() == 4));
     }
 
     /**
@@ -121,8 +121,8 @@ public class ComplexNumberTest {
      */
     @Test
     public void testDivide() {
-        CartesianComplex t1 = new CartesianComplex(1,1);
-        CartesianComplex t2 = new CartesianComplex(2,2);
+        CartesianComplex t1 = new CartesianComplex(1, 1);
+        CartesianComplex t2 = new CartesianComplex(2, 2);
         CartesianComplex result = t1.divide(t2);
         assertTrue((result.getReal() == 0.5) && (result.getImg() == 0));
     }
@@ -132,7 +132,7 @@ public class ComplexNumberTest {
      */
     @Test
     public void testToString() {
-        CartesianComplex t1 = new CartesianComplex(1,1);
+        CartesianComplex t1 = new CartesianComplex(1, 1);
         String s1 = t1.toString();
         String s2 = "(1,00+1,00j)";
         assertTrue(s1.compareTo(s2) == 0);
@@ -143,11 +143,11 @@ public class ComplexNumberTest {
      */
     @Test
     public void testAdd() {
-        CartesianComplex t1 = new CartesianComplex(1,1);
-        CartesianComplex t2 = new CartesianComplex(2,2);
+        CartesianComplex t1 = new CartesianComplex(1, 1);
+        CartesianComplex t2 = new CartesianComplex(2, 2);
         CartesianComplex result = t1.add(t2);
-        assertTrue((result.getReal() == 3) && (result.getImg() == 3)); 
-        
+        assertTrue((result.getReal() == 3) && (result.getImg() == 3));
+
     }
 
     /**
@@ -155,12 +155,12 @@ public class ComplexNumberTest {
      */
     @Test
     public void testSubtract() {
-        
-        CartesianComplex t1 = new CartesianComplex(1,1);
-        CartesianComplex t2 = new CartesianComplex(2,2);
+
+        CartesianComplex t1 = new CartesianComplex(1, 1);
+        CartesianComplex t2 = new CartesianComplex(2, 2);
         CartesianComplex result = t1.subtract(t2);
-        assertTrue((result.getReal() == -1) && (result.getImg() == -1)); 
-        
+        assertTrue((result.getReal() == -1) && (result.getImg() == -1));
+
     }
 
     /**
