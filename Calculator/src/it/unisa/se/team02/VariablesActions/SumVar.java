@@ -15,14 +15,14 @@ import java.util.Map;
  *
  * @author Team02
  */
-public class Greater extends Operation {
+public class SumVar extends Operation {
 
     @Override
     public char executeVariable(ObservableStack<CartesianComplex> stack, Map<Character, CartesianComplex> map, Menu menu) {
         Azione azione = menu.takeAction();
         char y = azione.getOp().charAt(0);
-        map.put(y, stack.peek());
+        CartesianComplex[] complexSum = {stack.peek(), map.get(y)};
+        map.put(y, complexSum[0].add(complexSum[1]));
         return y;
     }
-
 }

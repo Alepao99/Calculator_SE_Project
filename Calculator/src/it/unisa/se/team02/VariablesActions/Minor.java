@@ -4,22 +4,25 @@
  */
 package it.unisa.se.team02.VariablesActions;
 
-import it.unisa.se.team02.ComplexNumber.CartesianComplex;
 import it.unisa.se.team02.ObservableStack.ObservableStack;
+import it.unisa.se.team02.Operation.Azione;
+import it.unisa.se.team02.Operation.Menu;
+import it.unisa.se.team02.Operation.Operation;
+import it.unisa.se.team02.ComplexNumber.CartesianComplex;
 import java.util.Map;
-import javafx.scene.control.Button;
 
 /**
  *
- * @author Francesco
+ * @author Team02
  */
-public class Minor implements Operation{
+public class Minor extends Operation {
 
     @Override
-    public boolean execute(ObservableStack<CartesianComplex> stack, Button x, Map<Button, CartesianComplex> map) {
-        stack.push(map.get(x));
-        return true;
-    
+    public char executeVariable(ObservableStack<CartesianComplex> stack, Map<Character, CartesianComplex> map, Menu menu) {
+        Azione azione = menu.takeAction();
+        char y = azione.getOp().charAt(0);
+        stack.push(map.get(y));
+        return y;
     }
-    
 }
+

@@ -8,9 +8,9 @@ import it.unisa.se.team02.Alert.ShowInformation;
 import it.unisa.se.team02.ObservableStack.ObservableStack;
 import it.unisa.se.team02.ComplexNumber.CartesianComplex;
 import it.unisa.se.team02.ComplexNumber.*;
-import it.unisa.se.team02.VariablesActions.Azione;
+import it.unisa.se.team02.Operation.Azione;
 import it.unisa.se.team02.VariablesActions.Greater;
-import it.unisa.se.team02.VariablesActions.Menu;
+import it.unisa.se.team02.Operation.Menu;
 import it.unisa.se.team02.VariablesActions.Minor;
 import java.net.URL;
 import java.util.List;
@@ -261,31 +261,9 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void handleVariablesAction(ActionEvent event) {
-        Button source = (Button) event.getSource();
-        this.Btn = source;
-        if (source == greater) {
-            currentSign += ">";
-            updateOutputSign();
-            op.setCommand(greater, new Greater());
-            return;
-        }
-        if (source == minor) {
-            currentSign += "<";
-            updateOutputSign();
-            op.setCommand(minor, new Minor());
-            return;
-        }
-
-        if (source.getId().matches("[a-z]")) {
-            if (op.isEmpty() == false) {
-                Azione azione = op.takeAction();
-                currentSign = currentSign.substring(1);
-                updateOutputSign();
-                azione.getCommand().execute(stack, source, map);
-            }
-            return;
-        }
+        //to modify
     }
+    
 
     @FXML
     private void handleManipulationCommand(ActionEvent event) {
