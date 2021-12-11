@@ -4,14 +4,17 @@ import it.unisa.se.team02.Alert.ShowInformation;
 import it.unisa.se.team02.ObservableStack.ObservableStack;
 import it.unisa.se.team02.ComplexNumber.CartesianComplex;
 import it.unisa.se.team02.ComplexNumber.*;
+import it.unisa.se.team02.ObservableStack.MemoryStack;
 import it.unisa.se.team02.Operation.Azione;
 import it.unisa.se.team02.Operation.Menu;
 import it.unisa.se.team02.Operation.OperatorFactory;
 import it.unisa.se.team02.Operation.SimbolClass;
 import it.unisa.se.team02.Operation.UserFunction;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Stack;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.MapChangeListener;
@@ -57,7 +60,7 @@ public class FXMLDocumentController implements Initializable {
     private Menu menu;
 
     //Mappa che associa la variabile al rispettivo valore complesso EX -> >a
-    private ObservableMap<Button, CartesianComplex> map;
+    private ObservableMap<Character, CartesianComplex> map;
 
     //Numero corrente
     private String currentNumber = "";
@@ -244,7 +247,8 @@ public class FXMLDocumentController implements Initializable {
 
     private Button Btn;
     private MapChangeListener<Button, CartesianComplex> listener = null;
-
+    private Stack<MemoryStack> stackVar;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         stack = new ObservableStack<>();
@@ -267,7 +271,7 @@ public class FXMLDocumentController implements Initializable {
 
             }
         };
-        map.addListener(listener);
+        //map.addListener(listener);
     }
 
     private void inizialize() {
@@ -284,6 +288,10 @@ public class FXMLDocumentController implements Initializable {
      */
     @FXML
     private void handleButtonAction(ActionEvent event) {
+        Button source = (Button) event.getSource();
+        if (source == saveVariables) {
+            stackVar.push(new MemoryStack(new HashMap<>(map)));
+        }
 
     }
 
