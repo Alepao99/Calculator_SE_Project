@@ -2,7 +2,7 @@ package it.unisa.se.team02.Operation;
 
 /**
  *
- * @author Francesco
+ * @author Team02
  */
 public class Azione {
     private String op;
