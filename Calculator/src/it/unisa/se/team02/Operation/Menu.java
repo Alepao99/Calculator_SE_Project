@@ -30,4 +30,8 @@ public class Menu {
     public void removeAction() {
         list.remove(list.size() - 1);
     }
+
+    public List<Azione> getList() {
+        return list;
+    }
 }
