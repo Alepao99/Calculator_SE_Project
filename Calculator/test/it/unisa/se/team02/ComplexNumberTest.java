@@ -291,6 +291,23 @@ public class ComplexNumberTest {
         assertTrue(img1.compareTo("1.0032") == 0);
     }
 
+ /**
+     * Test of Exp method, of class CartesianComplex.
+     */
+    @Test
+    public void testExp() {
+        CartesianComplex t1 = new CartesianComplex(2, 3);
+        CartesianComplex result = t1.exp();
+        String real1 = String.valueOf(result.getReal());
+        real1 = real1.substring(0, 5);
+        String img1 = String.valueOf(result.getImg());
+        img1 = img1.substring(0, 5);
+        assertTrue(real1.compareTo("-7.31") == 0);
+        assertTrue(img1.compareTo("1.052") == 0);
+    }
 
-
+    
+   
+    
+    
 }

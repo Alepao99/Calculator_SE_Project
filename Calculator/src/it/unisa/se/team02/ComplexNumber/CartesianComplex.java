@@ -177,4 +177,18 @@ public class CartesianComplex implements Complex {
     public CartesianComplex tan() {
         return sin().divide(cos());
     }
+    
+     /**
+     * This method allows to obatin the exp of a complex number
+     *
+     * @return a complex number that contains the results of the exp
+     *
+     */
+    public CartesianComplex exp() {
+        return new CartesianComplex(Math.exp(real) * Math.cos(img), Math.exp(real) * Math.sin(img));
+    }
+    
+    
+    
+    
 }
