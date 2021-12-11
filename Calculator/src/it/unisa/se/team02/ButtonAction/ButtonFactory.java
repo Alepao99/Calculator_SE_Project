@@ -9,7 +9,7 @@ import java.util.Map;
 
 /**
  *
- * @author aless
+ * @author Team02
  */
 public class ButtonFactory {
 

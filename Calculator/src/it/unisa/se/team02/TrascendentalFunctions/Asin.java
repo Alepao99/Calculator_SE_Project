@@ -13,7 +13,7 @@ import it.unisa.se.team02.Operation.Operation;
 
 /**
  *
- * @author Francesco
+ * @author Team02
  */
 public class Asin extends Operation{
 
