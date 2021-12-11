@@ -34,4 +34,8 @@ public class Menu {
     public List<Azione> getList() {
         return list;
     }
+
+    public void reset() {
+        list.clear();
+    }
 }

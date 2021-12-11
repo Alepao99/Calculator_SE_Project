@@ -7,12 +7,18 @@ import it.unisa.se.team02.ComplexNumber.*;
 import it.unisa.se.team02.ObservableStack.MemoryStack;
 import it.unisa.se.team02.Operation.Azione;
 import it.unisa.se.team02.Operation.Menu;
+import it.unisa.se.team02.Operation.Operation;
 import it.unisa.se.team02.Operation.OperatorFactory;
 import it.unisa.se.team02.Operation.SimbolClass;
 import it.unisa.se.team02.Operation.UserFunction;
+import it.unisa.se.team02.StateCalculator.ContextCalculator;
+import it.unisa.se.team02.StateCalculator.NormalState;
+import it.unisa.se.team02.StateCalculator.PowState;
+import it.unisa.se.team02.VariablesActions.*;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Stack;
 import javafx.application.Platform;
@@ -30,6 +36,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
 /**
@@ -65,7 +72,8 @@ public class FXMLDocumentController implements Initializable {
     //Numero corrente
     private String currentNumber = "";
     //Comando corrente
-    private List<String> currentSign;;
+    private List<String> currentSign;
+    ;
 
     //CLasse che mostra gli allert
     private ShowInformation info;
@@ -185,11 +193,16 @@ public class FXMLDocumentController implements Initializable {
 
     //Tabella che salva il nome e la lista di comandi della funzione
     @FXML
-    private TableView<?> tableFunc;
+    private TableView<UserFunction> tableFunc;
     @FXML
-    private TableColumn<?, ?> nameCln;
+    private TableColumn<UserFunction, String> nameCln;
     @FXML
-    private TableColumn<?, ?> commandCln;
+    private TableColumn<UserFunction, String> commandCln;
+
+    //attributi per la tabella
+    private ObservableList<UserFunction> functionK;
+    private Map<String, UserFunction> mapFunc;
+
     @FXML
     private Button loadFunc;
     @FXML
@@ -240,7 +253,7 @@ public class FXMLDocumentController implements Initializable {
     private Button saveVariables;
     @FXML
     private Button restoreCommand;
-    
+
     //Classi creazionni metodi, simoli, bottoni
     OperatorFactory opFactory;
     SimbolClass simbol;
@@ -248,19 +261,29 @@ public class FXMLDocumentController implements Initializable {
     private Button Btn;
     private MapChangeListener<Button, CartesianComplex> listener = null;
     private Stack<MemoryStack> stackVar;
-    
+    private String powNumber = "";
+    private String currentFunction;
+    private ContextCalculator contextCalculator;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         stack = new ObservableStack<>();
         menu = new Menu();
+        mapFunc = new HashMap<>();
+        nameCln.setCellValueFactory(new PropertyValueFactory<UserFunction, String>("name"));
+        commandCln.setCellValueFactory(new PropertyValueFactory<UserFunction, String>("funzione"));
+        contextCalculator = new ContextCalculator();
+        contextCalculator.setState(new NormalState());
 
+        functionK = FXCollections.observableArrayList();
         map = FXCollections.observableHashMap();
         events = FXCollections.observableArrayList();
-        
+
         inizialize();
-        
+
         variableList.setItems(events);
         mainList.setItems(stack);
+        tableFunc.setItems(functionK);
 
         listener = new MapChangeListener<Button, CartesianComplex>() {
             @Override
@@ -414,6 +437,18 @@ public class FXMLDocumentController implements Initializable {
      */
     @FXML
     private void viewFunc(MouseEvent event) {
+        currentSign.clear();
+        updateOutputSign();
+        menu.reset();
+        UserFunction uf = tableFunc.getSelectionModel().getSelectedItem();
+        uf.getCodice().forEach(a -> {
+            menu.getList().add(a);
+        });
+        nameFunc.setText(uf.getName());
+        outputSign.setText(uf.getFunzione());
+        updateSign(uf);
+        updateOutputSign();
+        currentFunction = uf.getName();
     }
 
     /**
@@ -433,6 +468,43 @@ public class FXMLDocumentController implements Initializable {
      */
     @FXML
     private void createFunc(ActionEvent event) {
+        if (!nameFunc.getText().isEmpty() && !outputSign.getText().isEmpty()) {
+            UserFunction uf = new UserFunction(nameFunc.getText(), outputSign.getText());
+            uf.setActions(menu);
+            mapFunc.put(uf.getName(), uf);
+            functionK.add(uf);
+
+            nameFunc.setText("");
+            currentSign.clear();
+            updateOutputSign();
+            menu.reset();
+        }
+    }
+
+    private void supportExecute() {
+        Azione azione = menu.takeAction();
+        Operation operation = azione.getCommand();
+        if (operation instanceof Greater
+                || operation instanceof Minor
+                || operation instanceof SubVar
+                || operation instanceof SumVar) {
+            char y = operation.executeVariable(stack, map, menu);
+            events.set((int) (y) - 97, new VarEvent(y, map.get(y)));
+            currentSign.remove(0);
+            currentSign.remove(0);
+        } else {
+            if (contextCalculator.getState().getClass().isInstance(new PowState())) {
+                operation.doOperation(stack, Integer.parseInt(powNumber));
+                contextCalculator.setState(new NormalState());
+                for (int i = 0; i < powNumber.length(); i++) {
+                    currentSign.remove(0);
+                }
+                powNumber = "";
+            }
+            operation.doOperation(stack);
+            currentSign.remove(0);
+        }
+        updateOutputSign();
     }
 
     /**
@@ -442,6 +514,15 @@ public class FXMLDocumentController implements Initializable {
      */
     @FXML
     private void execute(ActionEvent event) {
+        if (nameFunc.getText().compareTo("") == 0) {
+            supportExecute();
+        } else {//parte funzoioni
+            while (menu.getList().size() != 0) {
+                supportExecute();
+            }
+            currentSign.clear();
+            nameFunc.setText("");
+        }
     }
 
     /**
@@ -499,6 +580,27 @@ public class FXMLDocumentController implements Initializable {
             s += g + " ";
         }
         outputSign.setText(s);
+    }
+
+    private void updateSign(UserFunction uf) {
+        for (Azione listAction : uf.getCodice()) {
+            if (listAction.getOp().matches("[a-z]")) {
+                currentSign.add(listAction.getOp());
+            } else {
+                currentSign.add(simbol.getSimbol(listAction.getOp()));
+            }
+        }
+    }
+
+    /**
+     * This method allows the control of the input to have a correct complex
+     * number
+     *
+     * @param s
+     * @return boolean 
+     */
+    private boolean checkValue(String s) {
+        return s.contains(",") ? s.matches("-?[0-9]*.?[0-9]+,{1}-?[0-9]*.?[0-9]+") : s.matches("-?[0-9]*.?[0-9]+");
     }
 
 }
