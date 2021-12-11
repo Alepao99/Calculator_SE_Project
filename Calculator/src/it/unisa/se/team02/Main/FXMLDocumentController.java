@@ -4,8 +4,13 @@ import it.unisa.se.team02.Alert.ShowInformation;
 import it.unisa.se.team02.ObservableStack.ObservableStack;
 import it.unisa.se.team02.ComplexNumber.CartesianComplex;
 import it.unisa.se.team02.ComplexNumber.*;
+import it.unisa.se.team02.Operation.Azione;
 import it.unisa.se.team02.Operation.Menu;
+import it.unisa.se.team02.Operation.OperatorFactory;
+import it.unisa.se.team02.Operation.SimbolClass;
+import it.unisa.se.team02.Operation.UserFunction;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -57,7 +62,7 @@ public class FXMLDocumentController implements Initializable {
     //Numero corrente
     private String currentNumber = "";
     //Comando corrente
-    private String currentSign = "";
+    private List<String> currentSign;;
 
     //CLasse che mostra gli allert
     private ShowInformation info;
@@ -232,6 +237,10 @@ public class FXMLDocumentController implements Initializable {
     private Button saveVariables;
     @FXML
     private Button restoreCommand;
+    
+    //Classi creazionni metodi, simoli, bottoni
+    OperatorFactory opFactory;
+    SimbolClass simbol;
 
     private Button Btn;
     private MapChangeListener<Button, CartesianComplex> listener = null;
@@ -294,6 +303,10 @@ public class FXMLDocumentController implements Initializable {
      */
     @FXML
     private void handleOperationCommand(ActionEvent event) {
+        Button source = (Button) event.getSource();
+        currentSign.add(simbol.getSimbol(source.getId()));
+        updateOutputSign();
+        opFactory.setOperation(source.getId(), menu);
     }
 
     /**
@@ -317,7 +330,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void deleteOperationSign(ActionEvent event) {
         menu.removeAction();
-        currentSign = currentSign.substring(0, currentSign.length() - 1);
+        currentSign.remove(currentSign.size() - 1);
         updateOutputSign();
 
     }
@@ -473,7 +486,11 @@ public class FXMLDocumentController implements Initializable {
     }
 
     private void updateOutputSign() {
-        outputSign.setText(currentSign);
+        String s = "";
+        for (String g : currentSign) {
+            s += g + " ";
+        }
+        outputSign.setText(s);
     }
 
 }
