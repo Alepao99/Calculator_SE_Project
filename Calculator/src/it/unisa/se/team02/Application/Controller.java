@@ -57,13 +57,11 @@ public class Controller implements Initializable {
 
     private final byte characterAMinChar = 97;
     private final byte alphabetLenght = 26;
-
+    @FXML
+    private AnchorPane rootPane;
     //This label allows you to view complex input numbers
     @FXML
     private Label inputText;
-    //This label allows you to view complex output numbers
-    @FXML
-    private Label outputText;
 
     //Lista che contiene i numeri complessi dello stack 
     @FXML
@@ -170,13 +168,14 @@ public class Controller implements Initializable {
     private Button dot;
     @FXML
     private Button comma;
-    //Lista che contiene i valori delle variabili
+
+    //List containing the values of the variables
     @FXML
     private ListView<VarEvent> variableList;
     //Lista osservabile che ha i valori delle variabili
     private ObservableList<VarEvent> events;
 
-    //Bottoni che lavorano sulle variabili
+    //Buttons that activate operations on variables 
     @FXML
     private Button subVar;
     @FXML
@@ -186,7 +185,7 @@ public class Controller implements Initializable {
     @FXML
     private Button sumVar;
 
-    //BOttoni che lavorano sui valori dello stack
+    //Buttons that activate stack operations
     @FXML
     private Button drop;
     @FXML
@@ -198,7 +197,7 @@ public class Controller implements Initializable {
     @FXML
     private Button clear;
 
-    //Tabella che salva il nome e la lista di comandi della funzione
+    //Table that saves the name and command list of the function
     @FXML
     private TableView<UserFunction> tableFunc;
     @FXML
@@ -206,7 +205,6 @@ public class Controller implements Initializable {
     @FXML
     private TableColumn<UserFunction, String> commandCln;
 
-    //attributi per la tabella
     private ObservableList<UserFunction> functionK;
     private Map<String, UserFunction> mapFunc;
 
@@ -217,7 +215,7 @@ public class Controller implements Initializable {
     @FXML
     private TextField nameFunc;
 
-    //bottoni che abilitano le operazioni trigonometriche
+    //Buttons that enable trigonometric operations
     @FXML
     private Button pow;
     @FXML
@@ -241,7 +239,7 @@ public class Controller implements Initializable {
     @FXML
     private Button tan;
 
-    //bottoni che abilitano le operazioni classiche 
+    //Buttons that enable normal operations 
     @FXML
     private Button multi;
     @FXML
@@ -255,13 +253,12 @@ public class Controller implements Initializable {
     @FXML
     private Button sqrt;
 
-    //Bottoni di salvataggio e ripristino delle variabili
+    //Buttons for saving and restoring variables
     @FXML
     private Button saveVariables;
     @FXML
     private Button restoreCommand;
 
-    //Classi creazionni metodi, simoli, bottoni
     private OperatorFactory opFactory;
     private SimbolClass simbol;
     private ContextFunction context;
@@ -270,8 +267,6 @@ public class Controller implements Initializable {
     private String powNumber = "";
     private String currentFunction;
     private ContextCalculator contextCalculator;
-    @FXML
-    private AnchorPane rootPane;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -306,7 +301,6 @@ public class Controller implements Initializable {
     }
 
     // This method allows you to enter the complex number by clicking on the button
-    
     @FXML
     private void handleButtonAction(ActionEvent event) {
         Button source = (Button) event.getSource();
@@ -330,7 +324,6 @@ public class Controller implements Initializable {
     }
 
     // This method allows you to capture alphanumeric buttons
-    
     @FXML
     private void handleVariablesCommand(ActionEvent event) {
         Button source = (Button) event.getSource();
@@ -356,9 +349,7 @@ public class Controller implements Initializable {
         }
     }
 
-    
     // This method allows you to create complex operation
-    
     @FXML
     private void handleOperationCommand(ActionEvent event) {
         Button source = (Button) event.getSource();
@@ -368,7 +359,6 @@ public class Controller implements Initializable {
     }
 
     // This method allows you to create Function complex operation
-     
     @FXML
     private void handleFunctionCommand(ActionEvent event) {
         Button source = (Button) event.getSource();
@@ -385,7 +375,6 @@ public class Controller implements Initializable {
     }
 
     // This method allows you to perform all Trigonometric complex operation
- 
     @FXML
     private void handleTrigonometricCommand(ActionEvent event) {
         Button source = (Button) event.getSource();
@@ -410,7 +399,6 @@ public class Controller implements Initializable {
     }
 
     // This method allows you to perform all VariableAction operation.
-
     @FXML
     private void handleVariablesAction(ActionEvent event) {
         Button source = (Button) event.getSource();
@@ -443,7 +431,6 @@ public class Controller implements Initializable {
     }
 
     // This method allows the deletion of a character or number from the inpuText, updating the current number
-     
     @FXML
     private void delete(ActionEvent event) {
         currentNumber = currentNumber.substring(0, currentNumber.length() - 1);
@@ -451,14 +438,12 @@ public class Controller implements Initializable {
     }
 
     // This method allows to close the application
-    
     @FXML
     private void quitApplication(ActionEvent event) {
         Platform.exit();
     }
 
     // This method allows you to delete the function created
-    
     @FXML
     private void deleteFunc(ActionEvent event) {
         String s = tableFunc.getSelectionModel().getSelectedItem().getName();
@@ -468,7 +453,6 @@ public class Controller implements Initializable {
     }
 
     // This method allows you to see the function created
- 
     @FXML
     private void viewFunc(MouseEvent event) {
         currentSign.clear();
@@ -486,7 +470,6 @@ public class Controller implements Initializable {
     }
 
     // This method allows you to modify the function created by creating a new function
-  
     @FXML
     private void modifyFunc(ActionEvent event) {
         if (!nameFunc.getText().isEmpty()) {
@@ -499,14 +482,17 @@ public class Controller implements Initializable {
             uf.setFunzione(outputSign.getText());
             mapFunc.put(nameFunc.getText(), uf);
             functionK.add(uf);
-            currentSign.clear();
-            updateOutputSign();
-            nameFunc.setText("");
+            executeClearSignText();
         }
     }
 
+    private void executeClearSignText() {
+        currentSign.clear();
+        updateOutputSign();
+        nameFunc.setText("");
+    }
+
     // This method allows you to create a new function complex
-     
     @FXML
     private void createFunc(ActionEvent event) {
         if (!nameFunc.getText().isEmpty() && !outputSign.getText().isEmpty()) {
@@ -515,15 +501,12 @@ public class Controller implements Initializable {
             mapFunc.put(uf.getName(), uf);
             functionK.add(uf);
 
-            nameFunc.setText("");
-            currentSign.clear();
-            updateOutputSign();
+            executeClearSignText();
             menu.reset();
         }
     }
 
     // This method extracts the next action from the menu, executes it and update the currentSign.
-    
     private void supportExecute() {
         Azione azione = menu.takeAction();
         Operation operation = azione.getCommand();
@@ -551,7 +534,6 @@ public class Controller implements Initializable {
     }
 
     // This method allows you to execute a function complex
-   
     @FXML
     private void execute(ActionEvent event) {
         if (nameFunc.getText().compareTo("") == 0) {
@@ -566,48 +548,29 @@ public class Controller implements Initializable {
     }
 
     // This method allows to understand if the entered text is correct
-     
     private boolean checkValue(String s) {
         return s.contains(",") && s.chars().filter(ch -> ch == ',').count() == 1 ? s.matches("-?[0-9]*.?[0-9]+,{1}-?[0-9]*.?[0-9]+") : s.matches("-?[0-9]*.?[0-9]+");
     }
 
-    /**
-     * This method concatenates the correct number and updates the input text
-     *
-     * @param character number or character that is captured by the user
-     */
-    public void addChar(String character) {
+    //This method concatenates the correct number and updates the input text
+    private void addChar(String character) {
         currentNumber += character;
         updateTextField();
     }
 
     // The refresh method initializes the variable "currentNumber" and calls the updateTextField() method. 
-    
     private void refresh() {
         currentNumber = "";
         updateTextField();
     }
 
-    /**
-     * The updateTextField method sets the content of the variable
-     * "currentNumber" in the input area of ​​the interface. Return Void.
-     */
-    public void updateTextField() {
+    // The updateTextField method sets the content of the variable
+    // "currentNumber" in the input area of ​​the interface. Return Void.
+    private void updateTextField() {
         inputText.setText(currentNumber);
     }
 
-    /**
-     * This method updates the output text with the result of an operation
-     *
-     * @param complex this parameter contains the result of the operation and is
-     * a complex number
-     */
-    public void setResult(CartesianComplex complex) {
-        outputText.setText(complex.toString());
-    }
- 
     // This method sets the content of the variable "currentSign" in the outputSign area of ​​the interface.
-     
     private void updateOutputSign() {
         String s = "";
         for (String g : currentSign) {
@@ -617,7 +580,6 @@ public class Controller implements Initializable {
     }
 
     // This method sets the contents of the attribute "Codice" of the UserFunction object in the variable "currentSign".
-     
     private void updateSign(UserFunction uf) {
         for (Azione listAction : uf.getCodice()) {
             if (listAction.getOp().matches("[a-z]")) {

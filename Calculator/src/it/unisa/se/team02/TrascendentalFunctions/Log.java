@@ -3,6 +3,8 @@ package it.unisa.se.team02.TrascendentalFunctions;
 import it.unisa.se.team02.ObservableStack.ObservableStack;
 import it.unisa.se.team02.Operation.Operation;
 import it.unisa.se.team02.ComplexNumber.CartesianComplex;
+import it.unisa.se.team02.ComplexNumber.ComplexFactory;
+import it.unisa.se.team02.ComplexNumber.ComplexType;
 import it.unisa.se.team02.ComplexNumber.TrigonometricComplex;
 
 /**
@@ -13,8 +15,9 @@ public class Log extends Operation{
 
     @Override
     public void doOperation(ObservableStack<CartesianComplex> stack) {
-        TrigonometricComplex complex = new TrigonometricComplex(stack.pop().getReal(),stack.pop().getImg());
-        stack.push(complex.log());
+        CartesianComplex complex = stack.pop();
+        TrigonometricComplex trigcomplex = (TrigonometricComplex) ComplexFactory.createComplex(ComplexType.TRIGONOMETRIC, complex.getReal(), complex.getImg());
+        stack.push(trigcomplex.log());
     }    
     
 }
