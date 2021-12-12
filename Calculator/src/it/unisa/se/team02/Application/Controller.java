@@ -449,7 +449,7 @@ public class Controller implements Initializable {
      */
     @FXML
     private void push(ActionEvent event) {
-        if (checkInput(currentNumber)) {
+        if (checkValue(currentNumber)) {
             Complex complex = currentNumber.contains(",")
                     ? ComplexFactory.createComplex(ComplexType.CARTESIAN, Double.valueOf(currentNumber.split(",")[0]), Double.valueOf(currentNumber.split(",")[1]))
                     : ComplexFactory.createComplex(ComplexType.CARTESIAN, Double.valueOf(currentNumber), Double.valueOf("0"));
@@ -492,6 +492,10 @@ public class Controller implements Initializable {
      */
     @FXML
     private void deleteFunc(ActionEvent event) {
+        String s = tableFunc.getSelectionModel().getSelectedItem().getName();
+        functionK.remove(mapFunc.remove(s));
+        currentSign.clear();
+        updateOutputSign();
     }
 
     /**
