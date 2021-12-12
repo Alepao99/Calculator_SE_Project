@@ -539,6 +539,12 @@ public class Controller implements Initializable {
             menu.reset();
         }
     }
+    
+     /**
+     * 
+     * This method extracts the next action from the menu, executes it and update the currentSign.
+     *
+     */
 
     private void supportExecute() {
         Azione azione = menu.takeAction();
@@ -633,6 +639,12 @@ public class Controller implements Initializable {
         outputText.setText(complex.toString());
     }
 
+    /**
+     * 
+     * This method sets the content of the variable
+     * "currentSign" in the outputSign area of ​​the interface.
+     *
+     */
     private void updateOutputSign() {
         String s = "";
         for (String g : currentSign) {
