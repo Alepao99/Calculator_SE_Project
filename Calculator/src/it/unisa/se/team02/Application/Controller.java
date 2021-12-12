@@ -343,6 +343,11 @@ public class Controller implements Initializable {
      */
     @FXML
     private void handleVariablesCommand(ActionEvent event) {
+        Button source = (Button) event.getSource();
+        if (source == saveVariables) {
+            stackVar.push(new MemoryStack(new HashMap<>(map)));
+
+        }
     }
 
     /**
@@ -382,6 +387,17 @@ public class Controller implements Initializable {
      */
     @FXML
     private void handleTrigonometricCommand(ActionEvent event) {
+        Button source = (Button) event.getSource();
+        currentSign.add(source.getId());
+        updateOutputSign();
+        if (source == pow) {
+            contextCalculator = new ContextCalculator();
+            contextCalculator.setState(new PowState());
+            opFactory.setOperation(source.getId(), menu);
+        } else {
+
+            opFactory.setOperation(source.getId(), menu);
+        }
     }
 
     @FXML
@@ -398,7 +414,10 @@ public class Controller implements Initializable {
      */
     @FXML
     private void handleVariablesAction(ActionEvent event) {
-        //to modify
+        Button source = (Button) event.getSource();
+        currentSign.add(source.getId());
+        updateOutputSign();
+        opFactory.setOperationVariables(source.getId(), menu);
     }
 
     /**
