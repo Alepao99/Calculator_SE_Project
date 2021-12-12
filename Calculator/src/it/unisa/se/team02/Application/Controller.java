@@ -1,5 +1,6 @@
-package it.unisa.se.team02.Main;
+package it.unisa.se.team02.Application;
 
+import it.unisa.se.team02.Operation.VarEvent;
 import it.unisa.se.team02.Alert.ShowInformation;
 import it.unisa.se.team02.ObservableStack.ObservableStack;
 import it.unisa.se.team02.ComplexNumber.CartesianComplex;
@@ -46,7 +47,7 @@ import javafx.scene.input.MouseEvent;
  * @version n.n (gg-mm-aaaa)
  * @author Team02
  */
-public class FXMLDocumentController implements Initializable {
+public class Controller implements Initializable {
 
     private final byte characterAMinChar = 97;
     private final byte alphabetLenght = 26;

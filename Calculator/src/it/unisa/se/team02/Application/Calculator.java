@@ -1,4 +1,4 @@
-package it.unisa.se.team02.Main;
+package it.unisa.se.team02.Application;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -16,7 +16,7 @@ public class Calculator extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("View.fxml"));
 
         Scene scene = new Scene(root);
         stage.setResizable(true);
