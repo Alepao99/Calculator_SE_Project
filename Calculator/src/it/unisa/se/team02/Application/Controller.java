@@ -459,6 +459,7 @@ public class Controller implements Initializable {
             info = new ShowInformation(Alert.AlertType.ERROR, "Insertion error",
                     "Please consider this insert example", "x\n-x\nx,x\n-x,x\nx,-x\n-x,-x");
             info.showAlert();
+            deleteAll();
         }
 
     }
