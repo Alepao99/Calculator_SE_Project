@@ -305,12 +305,8 @@ public class Controller implements Initializable {
         }
     }
 
-    /**
-     * This method allows you to enter the complex number by clicking on the
-     * button
-     *
-     * @param event
-     */
+    // This method allows you to enter the complex number by clicking on the button
+    
     @FXML
     private void handleButtonAction(ActionEvent event) {
         Button source = (Button) event.getSource();
@@ -333,11 +329,8 @@ public class Controller implements Initializable {
         updateTextField();
     }
 
-    /**
-     * This method allows you to capture alphanumeric buttons
-     *
-     * @param event
-     */
+    // This method allows you to capture alphanumeric buttons
+    
     @FXML
     private void handleVariablesCommand(ActionEvent event) {
         Button source = (Button) event.getSource();
@@ -363,11 +356,9 @@ public class Controller implements Initializable {
         }
     }
 
-    /**
-     * This method allows you to create complex operation
-     *
-     * @param event
-     */
+    
+    // This method allows you to create complex operation
+    
     @FXML
     private void handleOperationCommand(ActionEvent event) {
         Button source = (Button) event.getSource();
@@ -376,11 +367,8 @@ public class Controller implements Initializable {
         opFactory.setOperation(source.getId(), menu);
     }
 
-    /**
-     * This method allows you to create Function complex operation
-     *
-     * @param event
-     */
+    // This method allows you to create Function complex operation
+     
     @FXML
     private void handleFunctionCommand(ActionEvent event) {
         Button source = (Button) event.getSource();
@@ -396,11 +384,8 @@ public class Controller implements Initializable {
         }
     }
 
-    /**
-     * This method allows you to perform all Trigonometric complex operation
-     *
-     * @param event
-     */
+    // This method allows you to perform all Trigonometric complex operation
+ 
     @FXML
     private void handleTrigonometricCommand(ActionEvent event) {
         Button source = (Button) event.getSource();
@@ -424,11 +409,8 @@ public class Controller implements Initializable {
 
     }
 
-    /**
-     * This method allows you to perform all VariableAction operation.
-     *
-     * @param event
-     */
+    // This method allows you to perform all VariableAction operation.
+
     @FXML
     private void handleVariablesAction(ActionEvent event) {
         Button source = (Button) event.getSource();
@@ -437,13 +419,11 @@ public class Controller implements Initializable {
         opFactory.setOperationVariables(source.getId(), menu);
     }
 
-    /**
-     * The push method creates a ComplexNumber starting from the string inserted
-     * in input via the interface, stored in the variable "currentNumber". It
-     * then adds the new ComplexNumber to the Stack and calls the refresh ()
-     * method. Return Void.
-     *
-     * @param event
+    /*
+      The push method creates a ComplexNumber starting from the string inserted
+      in input via the interface, stored in the variable "currentNumber". It
+      then adds the new ComplexNumber to the Stack and calls the refresh ()
+      method. Return Void.
      */
     @FXML
     private void push(ActionEvent event) {
@@ -462,33 +442,23 @@ public class Controller implements Initializable {
 
     }
 
-    /**
-     * This method allows the deletion of a character or number from the
-     * inpuText, updating the current number
-     *
-     * @param event
-     */
+    // This method allows the deletion of a character or number from the inpuText, updating the current number
+     
     @FXML
     private void delete(ActionEvent event) {
         currentNumber = currentNumber.substring(0, currentNumber.length() - 1);
         updateTextField();
     }
 
-    /**
-     * This method allows to close the application
-     *
-     * @param event
-     */
+    // This method allows to close the application
+    
     @FXML
     private void quitApplication(ActionEvent event) {
         Platform.exit();
     }
 
-    /**
-     * This method allows you to delete the function created
-     *
-     * @param event
-     */
+    // This method allows you to delete the function created
+    
     @FXML
     private void deleteFunc(ActionEvent event) {
         String s = tableFunc.getSelectionModel().getSelectedItem().getName();
@@ -497,11 +467,8 @@ public class Controller implements Initializable {
         updateOutputSign();
     }
 
-    /**
-     * This method allows you to see the function created
-     *
-     * @param event
-     */
+    // This method allows you to see the function created
+ 
     @FXML
     private void viewFunc(MouseEvent event) {
         currentSign.clear();
@@ -518,12 +485,8 @@ public class Controller implements Initializable {
         currentFunction = uf.getName();
     }
 
-    /**
-     * This method allows you to modify the function created by creating a new
-     * function
-     *
-     * @param event
-     */
+    // This method allows you to modify the function created by creating a new function
+  
     @FXML
     private void modifyFunc(ActionEvent event) {
         if (!nameFunc.getText().isEmpty()) {
@@ -542,11 +505,8 @@ public class Controller implements Initializable {
         }
     }
 
-    /**
-     * This method allows you to create a new function complex
-     *
-     * @param event
-     */
+    // This method allows you to create a new function complex
+     
     @FXML
     private void createFunc(ActionEvent event) {
         if (!nameFunc.getText().isEmpty() && !outputSign.getText().isEmpty()) {
@@ -562,12 +522,8 @@ public class Controller implements Initializable {
         }
     }
 
-    /**
-     *
-     * This method extracts the next action from the menu, executes it and
-     * update the currentSign.
-     *
-     */
+    // This method extracts the next action from the menu, executes it and update the currentSign.
+    
     private void supportExecute() {
         Azione azione = menu.takeAction();
         Operation operation = azione.getCommand();
@@ -594,11 +550,8 @@ public class Controller implements Initializable {
         updateOutputSign();
     }
 
-    /**
-     * This method allows you to execute a function complex
-     *
-     * @param event
-     */
+    // This method allows you to execute a function complex
+   
     @FXML
     private void execute(ActionEvent event) {
         if (nameFunc.getText().compareTo("") == 0) {
@@ -612,12 +565,8 @@ public class Controller implements Initializable {
         }
     }
 
-    /**
-     * This method allows to understand if the entered text is correct
-     *
-     * @param s String
-     * @return a boolean type
-     */
+    // This method allows to understand if the entered text is correct
+     
     private boolean checkValue(String s) {
         return s.contains(",") && s.chars().filter(ch -> ch == ',').count() == 1 ? s.matches("-?[0-9]*.?[0-9]+,{1}-?[0-9]*.?[0-9]+") : s.matches("-?[0-9]*.?[0-9]+");
     }
@@ -632,12 +581,8 @@ public class Controller implements Initializable {
         updateTextField();
     }
 
-    /**
-     * The refresh method initializes the variable "currentNumber" and calls the
-     * updateTextField() method. Return Void.
-     *
-     * @see updateTextField
-     */
+    // The refresh method initializes the variable "currentNumber" and calls the updateTextField() method. 
+    
     private void refresh() {
         currentNumber = "";
         updateTextField();
@@ -660,13 +605,9 @@ public class Controller implements Initializable {
     public void setResult(CartesianComplex complex) {
         outputText.setText(complex.toString());
     }
-
-    /**
-     *
-     * This method sets the content of the variable "currentSign" in the
-     * outputSign area of ​​the interface.
-     *
-     */
+ 
+    // This method sets the content of the variable "currentSign" in the outputSign area of ​​the interface.
+     
     private void updateOutputSign() {
         String s = "";
         for (String g : currentSign) {
@@ -675,12 +616,8 @@ public class Controller implements Initializable {
         outputSign.setText(s);
     }
 
-    /**
-     * This method sets the contents of the attribute "Codice" of the
-     * UserFunction object in the variable "currentSign".
-     *
-     * @param UserFunction
-     */
+    // This method sets the contents of the attribute "Codice" of the UserFunction object in the variable "currentSign".
+     
     private void updateSign(UserFunction uf) {
         for (Azione listAction : uf.getCodice()) {
             if (listAction.getOp().matches("[a-z]")) {
