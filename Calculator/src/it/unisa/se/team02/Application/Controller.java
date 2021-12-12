@@ -620,6 +620,12 @@ public class Controller implements Initializable {
         outputText.setText(complex.toString());
     }
 
+    /**
+     * 
+     * This method sets the content of the variable
+     * "currentSign" in the outputSign area of ​​the interface.
+     *
+     */
     private void updateOutputSign() {
         String s = "";
         for (String g : currentSign) {
