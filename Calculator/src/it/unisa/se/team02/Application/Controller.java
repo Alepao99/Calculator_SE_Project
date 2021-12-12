@@ -520,6 +520,12 @@ public class Controller implements Initializable {
             menu.reset();
         }
     }
+    
+     /**
+     * 
+     * This method extracts the next action from the menu, executes it and update the currentSign.
+     *
+     */
 
     private void supportExecute() {
         Azione azione = menu.takeAction();
