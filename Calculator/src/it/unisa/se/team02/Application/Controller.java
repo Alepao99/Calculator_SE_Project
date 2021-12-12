@@ -348,10 +348,26 @@ public class Controller implements Initializable {
         Button source = (Button) event.getSource();
         if (source == saveVariables) {
             stackVar.push(new MemoryStack(new HashMap<>(map)));
+        }  
+        if (source == restoreCommand) {
 
+            if (stackVar.size() == 0) {
+                info = new ShowInformation(Alert.AlertType.ERROR, "Operation Error",
+                        "No configuration saved", "");
+                info.showAlert();
+            }
+            map.clear();
+            map.putAll(stackVar.pop().getMappa());
+            ResetList();
         }
     }
 
+    private void ResetList() {
+        for (Map.Entry<Character, CartesianComplex> entry : map.entrySet()) {
+            events.set((int) (entry.getKey()) - 97, new VarEvent(entry.getKey(), entry.getValue()));
+        }
+    }
+    
     /**
      * This method allows you to create complex operation
      *
@@ -411,6 +427,7 @@ public class Controller implements Initializable {
     }
 
     /**
+     * This method allows you to perform all VariableAction operation.
      *
      * @param event
      */
