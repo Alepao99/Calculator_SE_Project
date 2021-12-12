@@ -193,7 +193,7 @@ public class TrigonometricComplex implements Complex {
 
     @Override
     public String toString() {
-        return i > 0 ? "(" + String.format("%.2f", r) + "+" + String.format("%.2f", i) + "j)"
+        return i >= 0 ? "(" + String.format("%.2f", r) + "+" + String.format("%.2f", i) + "j)"
                 : "(" + String.format("%.2f", r) + String.format("%.2f", i) + "j)";
     }
 }

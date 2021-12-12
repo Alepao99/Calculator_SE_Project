@@ -2,13 +2,14 @@ package it.unisa.se.team02.Operation;
 
 import it.unisa.se.team02.ObservableStack.ObservableStack;
 import it.unisa.se.team02.ComplexNumber.CartesianComplex;
+import java.io.Serializable;
 import java.util.Map;
 
 /**
  *
  * @author Team02
  */
-public abstract class Operation {
+public abstract class Operation implements Serializable{
 
     public void doOperation(ObservableStack<CartesianComplex> stack) {
     }

@@ -103,7 +103,7 @@ public class CartesianComplex implements Complex {
      */
     @Override
     public String toString() {
-        return img > 0 ? "(" + String.format("%.2f", real) + "+" + String.format("%.2f", img) + "j)"
+        return img >= 0 ? "(" + String.format("%.2f", real) + "+" + String.format("%.2f", img) + "j)"
                 : "(" + String.format("%.2f", real) + String.format("%.2f", img) + "j)";
     }
 

@@ -17,7 +17,7 @@ public class Greater extends Operation {
     public char executeVariable(ObservableStack<CartesianComplex> stack, Map<Character, CartesianComplex> map, Menu menu) {
         Azione azione = menu.takeAction();
         char y = azione.getOp().charAt(0);
-        map.put(y, stack.peek());
+        map.put(y, stack.pop());
         return y;
     }
 

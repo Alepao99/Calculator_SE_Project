@@ -8,6 +8,7 @@ import it.unisa.se.team02.ComplexNumber.CartesianComplex;
 import it.unisa.se.team02.ComplexNumber.*;
 import it.unisa.se.team02.FunctionStoreLoad.ContextFunction;
 import it.unisa.se.team02.FunctionStoreLoad.LoadFunctions;
+import it.unisa.se.team02.FunctionStoreLoad.SaveFunctions;
 import it.unisa.se.team02.ObservableStack.MemoryStack;
 import it.unisa.se.team02.Operation.Azione;
 import it.unisa.se.team02.Operation.Menu;
@@ -20,6 +21,7 @@ import it.unisa.se.team02.StateCalculator.NormalState;
 import it.unisa.se.team02.StateCalculator.PowState;
 import it.unisa.se.team02.VariablesActions.*;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -260,10 +262,9 @@ public class Controller implements Initializable {
     private Button restoreCommand;
 
     //Classi creazionni metodi, simoli, bottoni
-    OperatorFactory opFactory;
-    SimbolClass simbol;
+    private OperatorFactory opFactory;
+    private SimbolClass simbol;
     private ContextFunction context;
-    private Button Btn;
     private MapChangeListener<Button, CartesianComplex> listener = null;
     private Stack<MemoryStack> stackVar;
     private String powNumber = "";
@@ -277,11 +278,15 @@ public class Controller implements Initializable {
         stack = new ObservableStack<>();
         menu = new Menu();
         mapFunc = new HashMap<>();
+        opFactory = new OperatorFactory();
+        simbol = new SimbolClass();
+        currentSign = new ArrayList<>();
+        button = new ButtonFactory();
+        stackVar = new Stack<>();
         nameCln.setCellValueFactory(new PropertyValueFactory<UserFunction, String>("name"));
         commandCln.setCellValueFactory(new PropertyValueFactory<UserFunction, String>("funzione"));
         contextCalculator = new ContextCalculator();
         contextCalculator.setState(new NormalState());
-        button = new ButtonFactory();
         functionK = FXCollections.observableArrayList();
         map = FXCollections.observableHashMap();
         events = FXCollections.observableArrayList();
@@ -292,16 +297,6 @@ public class Controller implements Initializable {
         mainList.setItems(stack);
         tableFunc.setItems(functionK);
 
-        listener = new MapChangeListener<Button, CartesianComplex>() {
-            @Override
-            public void onChanged(MapChangeListener.Change<? extends Button, ? extends CartesianComplex> ch) {
-                System.out.println("Map update");
-                events.set((int) (Btn.getId().charAt(0)) - characterAMinChar, new VarEvent(Btn.getId().charAt(0), map.get(Btn)));
-                outputText.setText(Btn.getId() + ":" + map.get(Btn));
-
-            }
-        };
-        //map.addListener(listener);
     }
 
     private void inizialize() {
@@ -332,12 +327,12 @@ public class Controller implements Initializable {
             deleteAll();
         }
     }
-    
+
     private void deleteAll() {
         currentNumber = "";
         updateTextField();
     }
-    
+
     /**
      * This method allows you to capture alphanumeric buttons
      *
@@ -348,7 +343,7 @@ public class Controller implements Initializable {
         Button source = (Button) event.getSource();
         if (source == saveVariables) {
             stackVar.push(new MemoryStack(new HashMap<>(map)));
-        }  
+        }
         if (source == restoreCommand) {
 
             if (stackVar.size() == 0) {
@@ -367,7 +362,7 @@ public class Controller implements Initializable {
             events.set((int) (entry.getKey()) - 97, new VarEvent(entry.getKey(), entry.getValue()));
         }
     }
-    
+
     /**
      * This method allows you to create complex operation
      *
@@ -395,7 +390,10 @@ public class Controller implements Initializable {
             for (UserFunction user : functionK) {
                 mapFunc.put(user.getName(), user);
             }
-        } 
+        } else {
+            context = new ContextFunction(new SaveFunctions());
+            context.executeStrategy(functionK, rootPane);
+        }
     }
 
     /**
@@ -563,13 +561,13 @@ public class Controller implements Initializable {
             menu.reset();
         }
     }
-    
-     /**
-     * 
-     * This method extracts the next action from the menu, executes it and update the currentSign.
+
+    /**
+     *
+     * This method extracts the next action from the menu, executes it and
+     * update the currentSign.
      *
      */
-
     private void supportExecute() {
         Azione azione = menu.takeAction();
         Operation operation = azione.getCommand();
@@ -620,7 +618,7 @@ public class Controller implements Initializable {
      * @param s String
      * @return a boolean type
      */
-    private boolean checkInput(String s) {
+    private boolean checkValue(String s) {
         return s.contains(",") && s.chars().filter(ch -> ch == ',').count() == 1 ? s.matches("-?[0-9]*.?[0-9]+,{1}-?[0-9]*.?[0-9]+") : s.matches("-?[0-9]*.?[0-9]+");
     }
 
@@ -664,9 +662,9 @@ public class Controller implements Initializable {
     }
 
     /**
-     * 
-     * This method sets the content of the variable
-     * "currentSign" in the outputSign area of ​​the interface.
+     *
+     * This method sets the content of the variable "currentSign" in the
+     * outputSign area of ​​the interface.
      *
      */
     private void updateOutputSign() {
@@ -676,9 +674,10 @@ public class Controller implements Initializable {
         }
         outputSign.setText(s);
     }
-    
-    /** 
-     * This method sets the contents of the attribute "Codice" of the UserFunction object in the variable "currentSign".
+
+    /**
+     * This method sets the contents of the attribute "Codice" of the
+     * UserFunction object in the variable "currentSign".
      *
      * @param UserFunction
      */
@@ -691,16 +690,4 @@ public class Controller implements Initializable {
             }
         }
     }
-
-    /**
-     * This method allows the control of the input to have a correct complex
-     * number
-     *
-     * @param s
-     * @return boolean 
-     */
-    private boolean checkValue(String s) {
-        return s.contains(",") ? s.matches("-?[0-9]*.?[0-9]+,{1}-?[0-9]*.?[0-9]+") : s.matches("-?[0-9]*.?[0-9]+");
-    }
-
 }

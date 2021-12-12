@@ -1,10 +1,12 @@
 package it.unisa.se.team02.Operation;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Team02
  */
-public class Azione {
+public class Azione implements Serializable{
     private String op;
     private Operation command;
 
