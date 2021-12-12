@@ -332,10 +332,12 @@ public class Controller implements Initializable {
             deleteAll();
         }
     }
+    
     private void deleteAll() {
         currentNumber = "";
         updateTextField();
     }
+    
     /**
      * This method allows you to capture alphanumeric buttons
      *
@@ -656,7 +658,12 @@ public class Controller implements Initializable {
         }
         outputSign.setText(s);
     }
-
+    
+    /** 
+     * This method sets the contents of the attribute "Codice" of the UserFunction object in the variable "currentSign".
+     *
+     * @param UserFunction
+     */
     private void updateSign(UserFunction uf) {
         for (Azione listAction : uf.getCodice()) {
             if (listAction.getOp().matches("[a-z]")) {
