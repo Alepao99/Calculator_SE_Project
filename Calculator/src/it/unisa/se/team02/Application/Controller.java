@@ -2,9 +2,12 @@ package it.unisa.se.team02.Application;
 
 import it.unisa.se.team02.Operation.VarEvent;
 import it.unisa.se.team02.Alert.ShowInformation;
+import it.unisa.se.team02.ButtonAction.ButtonFactory;
 import it.unisa.se.team02.ObservableStack.ObservableStack;
 import it.unisa.se.team02.ComplexNumber.CartesianComplex;
 import it.unisa.se.team02.ComplexNumber.*;
+import it.unisa.se.team02.FunctionStoreLoad.ContextFunction;
+import it.unisa.se.team02.FunctionStoreLoad.LoadFunctions;
 import it.unisa.se.team02.ObservableStack.MemoryStack;
 import it.unisa.se.team02.Operation.Azione;
 import it.unisa.se.team02.Operation.Menu;
@@ -39,6 +42,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 
 /**
  * This class allows you to interact with the application interface by capturing
@@ -74,7 +78,7 @@ public class Controller implements Initializable {
     private String currentNumber = "";
     //Comando corrente
     private List<String> currentSign;
-    ;
+    private ButtonFactory button;
 
     //CLasse che mostra gli allert
     private ShowInformation info;
@@ -258,13 +262,15 @@ public class Controller implements Initializable {
     //Classi creazionni metodi, simoli, bottoni
     OperatorFactory opFactory;
     SimbolClass simbol;
-
+    private ContextFunction context;
     private Button Btn;
     private MapChangeListener<Button, CartesianComplex> listener = null;
     private Stack<MemoryStack> stackVar;
     private String powNumber = "";
     private String currentFunction;
     private ContextCalculator contextCalculator;
+    @FXML
+    private AnchorPane rootPane;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -275,7 +281,7 @@ public class Controller implements Initializable {
         commandCln.setCellValueFactory(new PropertyValueFactory<UserFunction, String>("funzione"));
         contextCalculator = new ContextCalculator();
         contextCalculator.setState(new NormalState());
-
+        button = new ButtonFactory();
         functionK = FXCollections.observableArrayList();
         map = FXCollections.observableHashMap();
         events = FXCollections.observableArrayList();
@@ -313,12 +319,23 @@ public class Controller implements Initializable {
     @FXML
     private void handleButtonAction(ActionEvent event) {
         Button source = (Button) event.getSource();
-        if (source == saveVariables) {
-            stackVar.push(new MemoryStack(new HashMap<>(map)));
+        String s = button.getCharacter(source.getId(), currentNumber);
+        if (s != null) {
+            if (contextCalculator.getState().getClass().isInstance(new PowState())) {
+                contextCalculator.getState().doAction(currentSign, s);
+                powNumber += s;
+                updateOutputSign();
+            } else {
+                addChar(s);
+            }
+        } else {
+            deleteAll();
         }
-
     }
-
+    private void deleteAll() {
+        currentNumber = "";
+        updateTextField();
+    }
     /**
      * This method allows you to capture alphanumeric buttons
      *
@@ -348,6 +365,14 @@ public class Controller implements Initializable {
      */
     @FXML
     private void handleFunctionCommand(ActionEvent event) {
+        Button source = (Button) event.getSource();
+        if (source == loadFunc) {
+            context = new ContextFunction(new LoadFunctions());
+            context.executeStrategy(functionK, rootPane);
+            for (UserFunction user : functionK) {
+                mapFunc.put(user.getName(), user);
+            }
+        } 
     }
 
     /**
