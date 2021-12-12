@@ -485,6 +485,20 @@ public class Controller implements Initializable {
      */
     @FXML
     private void modifyFunc(ActionEvent event) {
+        if (!nameFunc.getText().isEmpty()) {
+            UserFunction uf = mapFunc.get(currentFunction);
+            functionK.remove(uf);
+            mapFunc.remove(currentFunction);
+            uf.setName(nameFunc.getText());
+            uf.getCodice().clear();
+            uf.setActions(menu);
+            uf.setFunzione(outputSign.getText());
+            mapFunc.put(nameFunc.getText(), uf);
+            functionK.add(uf);
+            currentSign.clear();
+            updateOutputSign();
+            nameFunc.setText("");
+        }
     }
 
     /**
